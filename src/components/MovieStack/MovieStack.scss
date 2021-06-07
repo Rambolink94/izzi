@@ -1,0 +1,58 @@
+@import "../../utility/css/sizing";
+
+.stack-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.stack-title {
+  text-align: left;
+  padding: 20px $stack-side-width;
+  margin: 0;
+  font-size: 1.5em;
+  color: white;
+}
+
+.stack {
+  position: relative;
+  .grid {
+    display: flex;
+    padding: 0 $stack-side-width;
+    overflow: auto;
+    width: 100%;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+@mixin arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.137);
+  top: 0;
+  width: $stack-side-width;
+  height: 100%;
+}
+
+.right-arrow {
+  @include arrow;
+  right: 0;
+}
+
+.left-arrow {
+  @include arrow;
+  left: 0;
+
+  .arrow {
+    transform: rotateY(180deg);
+  }
+}
+
+.arrow {
+  width: 80%;
+}

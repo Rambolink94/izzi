@@ -1,0 +1,76 @@
+.stack-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.stack-title {
+  text-align: left;
+  padding: 20px 60px;
+  margin: 0;
+  font-size: 1.5em;
+  color: white;
+}
+
+.stack {
+  position: relative;
+}
+
+.stack .grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 60px;
+  overflow: auto;
+  width: 100%;
+}
+
+.stack .grid::-webkit-scrollbar {
+  display: none;
+}
+
+.right-arrow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.137);
+  top: 0;
+  width: 60px;
+  height: 100%;
+  right: 0;
+}
+
+.left-arrow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.137);
+  top: 0;
+  width: 60px;
+  height: 100%;
+  left: 0;
+}
+
+.left-arrow .arrow {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.arrow {
+  width: 80%;
+}
+/*# sourceMappingURL=MovieStack.css.map */

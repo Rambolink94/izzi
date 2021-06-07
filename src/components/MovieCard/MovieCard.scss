@@ -1,0 +1,71 @@
+@import "../../utility/css/sizing";
+
+.movie-card {
+  position: relative;
+  background: #212121;
+  max-width: 100%;
+  width: $movie-card-width;
+  min-width: $movie-card-width;
+  height: $movie-card-height;
+  margin-right: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+
+  .movie-card-back {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  $lines-to-show: 2;
+  $line-height: 1.4;
+  $font-size: 1.1em;
+
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: absolute;
+    inset: 0;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.575);
+    opacity: 0%;
+    transition: opacity linear 0.1s;
+    .movie-card-title {
+      // Messy, might consider changing
+      margin: 0 auto;
+      display: block;
+      display: -webkit-box;
+      height: $lines-to-show * $line-height * $font-size;
+      max-width: 100%;
+      color: #cccccc;
+      font-size: 1.1em;
+      line-height: 1.4;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      text-transform: uppercase;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .play-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+
+      img {
+        width: 75px;
+        height: 75px;
+      }
+    }
+  }
+
+  &:hover,
+  &:focus {
+    .card-info {
+      opacity: 100%;
+    }
+  }
+}
