@@ -30,6 +30,7 @@
 }
 
 .right-arrow {
+  cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -44,10 +45,17 @@
   top: 0;
   width: 60px;
   height: 100%;
+  -webkit-transition: background-color ease-in 0.1s;
+  transition: background-color ease-in 0.1s;
   right: 0;
 }
 
+.right-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.411);
+}
+
 .left-arrow {
+  cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -62,7 +70,13 @@
   top: 0;
   width: 60px;
   height: 100%;
+  -webkit-transition: background-color ease-in 0.1s;
+  transition: background-color ease-in 0.1s;
   left: 0;
+}
+
+.left-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.411);
 }
 
 .left-arrow .arrow {

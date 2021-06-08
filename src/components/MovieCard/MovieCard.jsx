@@ -5,6 +5,8 @@ class MovieCard extends Component {
     state = {  }
     render() {
         const { backImage, title } = this.props;
+
+        // Sizing of this component should be dynamic based on the size of the screen
         return (
             <div className="movie-card">
                 <img className="movie-card-back" src={backImage} alt={title} />

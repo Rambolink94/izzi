@@ -29,6 +29,7 @@
 }
 
 @mixin arrow {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,6 +38,11 @@
   top: 0;
   width: $stack-side-width;
   height: 100%;
+  transition: background-color ease-in 0.1s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.411);
+  }
 }
 
 .right-arrow {
