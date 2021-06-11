@@ -19,7 +19,7 @@
   .grid {
     display: flex;
     padding: 0 $stack-side-width;
-    overflow: auto;
+    overflow: hidden;
     width: 100%;
 
     &::-webkit-scrollbar {

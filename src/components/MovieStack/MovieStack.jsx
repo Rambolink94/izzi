@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./MovieStack.css";
-const fetch = require("node-fetch");
 
 class MovieStack extends Component {
   constructor(props) {
@@ -93,7 +92,6 @@ class MovieStack extends Component {
       console.log("Scroll: ", stack.scrollLeft - stackSize, " - ", 0);
       stack.scrollBy({ top: 0, left: -stackSize, behavior: "smooth" });
       if (stack.scrollLeft - stackSize <= 0) this.setState({ isAtStart: true });
-      console.log("START");
       this.setState({ isAtEnd: false });
     } else {
       console.log(

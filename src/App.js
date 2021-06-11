@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import Header from "./components/Header/Header";
 import MovieCard from "./components/MovieCard/MovieCard";
 import MovieStack from "./components/MovieStack/MovieStack";
 
@@ -36,6 +37,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <Header />
         <MovieStack genre="Action">
           {this.state.movies.map((movie, index) => {
             return (

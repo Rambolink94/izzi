@@ -14,12 +14,27 @@ const movieSchema = new mongoose.Schema({
   runtime: Number,
 });
 
-const Course = mongoose.model("Movie", movieSchema);
-const course = new Course({
-  name: "The Mummy",
-  director: "Unkown",
-  description: "The legend you know. The adventure you have yet to imagine.",
-  poster_path: "/yhIsVvcUm7QxzLfT6HW2wLf5ajY.jpg",
-  release_date: new Date("1999-04-16"),
-  runtime: 124,
-});
+const Movie = mongoose.model("Movie", movieSchema);
+async function createMovie() {
+  const movie = new Movie({
+    title: "The Mummy.",
+    director: "Unkown",
+    description: "Evil boy returns.",
+    poster_path: "/yhIsVvcUm7QxzLfT6HW2wLf5ajY.jpg",
+    release_date: new Date("2016-04-16"),
+    runtime: 124,
+  });
+
+  const result = await movie.save();
+  console.log(result);
+}
+
+async function getMovies() {
+  const movies = await Movie.find({})
+    .limit(10)
+    .sort({ title: 1 })
+    .select({ title: 1, description: 1 });
+  console.log(movies);
+}
+
+getMovies();
