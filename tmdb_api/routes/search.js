@@ -14,3 +14,11 @@ router.get("/:name", (req, res) => {
 });
 
 module.exports = router;
+
+//[x] Arrival:      329865
+//[x] Mummy:        564
+//[x] Intersellar:  157336
+//[x] Infitiy War:  299536
+//[x] LOTR FOTR:    120
+//[x] Big Lebowski: 115
+//[x] Fountain:     1381

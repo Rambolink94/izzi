@@ -1,0 +1,113 @@
+{
+  "movies": [
+    {
+      "tmdb_id": 564,
+      "title": "The Mummy",
+      "director": "N/A",
+      "description": "Dashing legionnaire Rick O'Connell stumbles upon the hidden ruins of Hamunaptra while in the midst of a battle to claim the area in 1920s Egypt. It has been over three thousand years since former High Priest Imhotep suffered a fate worse than death as a punishment for a forbidden love—along with a curse that guarantees eternal doom upon the world if he is ever awoken.",
+      "poster_path": "/yhIsVvcUm7QxzLfT6HW2wLf5ajY.jpg",
+      "video_src": "./",
+      "genres": [
+        "60c54fe2058c4051ccf399ae",
+        "60c55546825d0d10e450aba5",
+        "60c5502bf221d749b02407aa"
+      ],
+      "release_date": "1999-04-16",
+      "runtime": 124,
+      "connected": true
+    },
+    {
+      "tmdb_id": 329865,
+      "title": "Arrival",
+      "director": "N/A",
+      "description": "Taking place after alien crafts land around the world, an expert linguist is recruited by the military to determine whether they come in peace or are a threat.",
+      "poster_path": "/x2FJsf1ElAgr63Y3PNPtJrcmpoe.jpg",
+      "video_src": "./",
+      "genres": [
+        "60c55501513e1750acca3e29",
+        "60c554fa513e1750acca3e28",
+        "60c554f3513e1750acca3e27"
+      ],
+      "release_date": "2016-11-10",
+      "runtime": 116,
+      "connected": true
+    },
+    {
+      "tmdb_id": 157336,
+      "title": "Interstellar",
+      "director": "Christopher Nolan",
+      "description": "The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.",
+      "poster_path": "/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
+      "video_src": "./",
+      "genres": [
+        "60c55546825d0d10e450aba5",
+        "60c554f3513e1750acca3e27",
+        "60c554fa513e1750acca3e28"
+      ],
+      "release_date": "2014-11-05",
+      "runtime": 169,
+      "connected": true
+    },
+    {
+      "tmdb_id": 299536,
+      "title": "Avengers: Infinity War",
+      "director": "N/A",
+      "description": "As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain.",
+      "poster_path": "/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
+      "video_src": "./",
+      "genres": [
+        "60c55546825d0d10e450aba5",
+        "60c54fe2058c4051ccf399ae",
+        "60c554fa513e1750acca3e28"
+      ],
+      "release_date": "2018-04-25",
+      "runtime": 149,
+      "connected": true
+    },
+    {
+      "tmdb_id": 120,
+      "title": "The Lord of the Rings: The Fellowship of the Ring",
+      "director": "N/A",
+      "description": "Young hobbit Frodo Baggins, after inheriting a mysterious ring from his uncle Bilbo, must leave his home in order to keep it from falling into the hands of its evil creator. Along the way, a fellowship is formed to protect the ringbearer and make sure that the ring arrives at its final destination: Mt. Doom, the only place where it can be destroyed.",
+      "poster_path": "/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg",
+      "video_src": "./",
+      "genres": [
+        "60c55546825d0d10e450aba5",
+        "60c54fe2058c4051ccf399ae",
+        "60c5502bf221d749b02407aa"
+      ],
+      "release_date": "2001-12-18",
+      "runtime": 179,
+      "connected": true
+    },
+    {
+      "tmdb_id": 115,
+      "title": "The Big Lebowski",
+      "director": "N/A",
+      "description": "Jeffrey 'The Dude' Lebowski, a Los Angeles slacker who only wants to bowl and drink White Russians, is mistaken for another Jeffrey Lebowski, a wheelchair-bound millionaire, and finds himself dragged into a strange series of events involving nihilists, adult film producers, ferrets, errant toes, and large sums of money.",
+      "poster_path": "/d4J7GotCjvDJBAYayZBTc5nLbbP.jpg",
+      "video_src": "./",
+      "genres": ["60c55765ffefab5a8805ef30", "60c55768ffefab5a8805ef31"],
+      "release_date": "1998-03-06",
+      "runtime": 117,
+      "connected": true
+    },
+    {
+      "tmdb_id": 1381,
+      "title": "The Fountain",
+      "director": "N/A",
+      "description": "Spanning over one thousand years, and three parallel stories, The Fountain is a story of love, death, spirituality, and the fragility of our existence in this world.",
+      "poster_path": "/tnmkVAYrHITpdKgmZ7CzVBEI4ho.jpg",
+      "video_src": "./",
+      "genres": [
+        "60c557fae532081ac8694bef",
+        "60c554f3513e1750acca3e27",
+        "60c55546825d0d10e450aba5",
+        "60c554fa513e1750acca3e28"
+      ],
+      "release_date": "2006-11-22",
+      "runtime": 96,
+      "connected": true
+    }
+  ]
+}

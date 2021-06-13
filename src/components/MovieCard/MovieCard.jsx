@@ -4,7 +4,7 @@ import "./MovieCard.css";
 class MovieCard extends Component {
   state = {};
   render() {
-    const { poster, title } = this.props;
+    const { poster, title } = this.props.movie;
 
     // Sizing of this component should be dynamic based on the size of the screen
     return (
