@@ -11,10 +11,10 @@ class Header extends Component {
           <div className="header-nav-wrapper">
             <nav>
               <ul className="nav-list">
-                <li>{/* <a href="#">Home</a> */}</li>
-                <li>{/* <a href="#">Genres</a> */}</li>
-                <li>{/* <a href="#">Movies</a> */}</li>
-                <li>{/* <a href="#">TV Shows</a> */}</li>
+                <li>Home</li>
+                <li>Genres</li>
+                <li>Movies</li>
+                <li>TV Shows</li>
               </ul>
             </nav>
           </div>

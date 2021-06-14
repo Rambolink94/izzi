@@ -1,0 +1,36 @@
+@import "../../utility/css/sizing";
+@import "../../utility/css/colors";
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: $footer-height;
+  padding: 40px $stack-side-width 60px $stack-side-width;
+  background: linear-gradient($background-dark-theme, black);
+}
+
+.logo-medium {
+  color: white;
+}
+
+.footer-links {
+  ul {
+    list-style-type: none;
+
+    li {
+      color: white;
+    }
+  }
+}
+
+.socials {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & > * {
+    padding: 10px;
+  }
+}

@@ -23,5 +23,17 @@ app.use("/api/movies/", movies);
 app.use("/api/genres", genres);
 app.use("/api/tmdb", tmdbPaths);
 
+const movieSrcAnalyzer = require("../izzi-server/movieSrcAnalyzer");
+const analyzer = new movieSrcAnalyzer();
+
+async function test() {
+  const names = await analyzer.getMovieTitles();
+  const ids = await analyzer.getTMDBids(names);
+  console.log("OUTSIDE: ", ids);
+  //analyzer.createMovies(ids);
+}
+
+test();
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
