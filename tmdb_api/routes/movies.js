@@ -48,6 +48,30 @@ router.get("/:id", async (req, res) => {
   res.send(movie);
 });
 
+router.get("/tmdbid/", async (req, res) => {
+  let test = true;
+  if (test)
+    return res
+      .status(400)
+      .send(`No movies with tmdbID of test could be found.`);
+  else res.send("Chicken");
+});
+
+// Get movie by tmdbID
+router.get("/tmdbid/:id", async (req, res) => {
+  console.log(req.params.id);
+  const movie = await Movie.findOne({
+    tmdbID: req.params.id,
+  });
+
+  if (!movie)
+    return res
+      .status(400)
+      .send(`No movies with tmdbID of ${req.params.id} could be found.`);
+
+  res.send(movie);
+});
+
 // Get movies by genre id
 router.get("/genre/:id", async (req, res) => {
   const movies = await Movie.find({ genres: req.params.id });

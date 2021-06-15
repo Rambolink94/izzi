@@ -29,11 +29,12 @@ const analyzer = new movieSrcAnalyzer();
 async function test() {
   const names = await analyzer.getMovieTitles();
   const ids = await analyzer.getTMDBids(names);
-  console.log("OUTSIDE: ", ids);
-  //analyzer.createMovies(ids);
+  await analyzer.createMovies(ids);
+  console.log("DONE!");
 }
 
-test();
+//test();
 
+// This will probably fail on some systems if something is already listening on this port
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));

@@ -17,9 +17,23 @@ router.get("/", async (req, res) => {
   res.send(genres);
 });
 
+// Get genre by name
+router.get("/:name", async (req, res) => {
+  const genre = await Genre.findOne({
+    name: { $regex: new RegExp(req.params.name, "i") },
+  });
+
+  if (!genre)
+    return res
+      .status(400)
+      .send(`The genre with id of ${req.params.id} could not be found.`);
+
+  res.send(genre);
+});
+
 // Get single genre
 router.get("/:id", async (req, res) => {
-  const genre = await Genre.findById(req.params.id);
+  const genre = await Genre.findById(mongoose.Types.ObjectId(req.params.id));
 
   if (!genre)
     return res
