@@ -16,25 +16,27 @@ class movieSrcAnalyzer {
   async getTMDBids(names) {
     // Runs a bit slow. Likely can increase its speed
     let cleanNames = names.map((name) => {
+      let originalName = name;
       name = name.replace(/\.[^/.]+$/, "");
       name = name.replace("_", " ");
       name = name.toLowerCase();
-      return name;
+      return { name, originalName };
     });
 
     try {
       const ids = [];
       let testCount = 10;
-      let isTest = true;
+      let isTest = false;
       for (const index in cleanNames) {
-        const name = cleanNames[index];
+        const name = cleanNames[index].name;
+        const originalName = cleanNames[index].originalName;
         const res = await fetch(`http://localhost:5000/api/search/${name}`);
         const movies = await res.json();
         if (movies.results[0] !== undefined) {
-          console.log("Name: ", name, "\t\t ID: ", movies.results[0].id);
+          console.log("ID: ", movies.results[0].id, "\t\tName: ", name);
           if (!(movies.results.length > 1)) {
             console.log(`-----: Accepted (${movies.results[0].id}) :-----`);
-            ids.push(movies.results[0].id);
+            ids.push({ id: movies.results[0].id, path: originalName });
           }
         }
         if (isTest && testCount <= 0) break;
@@ -62,7 +64,8 @@ class movieSrcAnalyzer {
 
   async createMovies(ids) {
     for (const index in ids) {
-      const id = ids[index];
+      const id = ids[index].id;
+      const path = ids[index].path;
 
       // Get movie info
       const res = await fetch(`http://localhost:5000/api/tmdb/${id}`);
@@ -78,7 +81,8 @@ class movieSrcAnalyzer {
         director: "N/A", // Maybe I should remove this field?
         description: tmdbMovie.overview,
         posterPath: tmdbMovie.poster_path,
-        videoSrc: "N/A", // Should be pulled earlier with the name, { name, cleanName, id };
+        backdropPath: tmdbMovie.backdrop_path,
+        videoSrc: path, // Should be pulled earlier with the name, { name, cleanName, id };
         genres: genres,
         releaseDate: tmdbMovie.release_date,
         runtime: tmdbMovie.runtime,
@@ -87,14 +91,15 @@ class movieSrcAnalyzer {
 
       console.log("NEW MOVIE: ", newMovie);
 
-      // Add movie to database
       try {
+        // Should do this with tmdbID, but it's not working
         const res = await fetch(
-          `http://localhost:5000/api/movies/tmdb/${newMovie.tmdbID}`
+          `http://localhost:5000/api/movies/tmdbid/${newMovie.tmdbID}`
         );
         let existingMovie = null;
         if (res.status !== 400) existingMovie = await res.json();
         if (!existingMovie) {
+          // Add movie to database
           const res = await fetch("http://localhost:5000/api/movies", {
             method: "POST",
             headers: {
@@ -106,7 +111,20 @@ class movieSrcAnalyzer {
           await res.json();
           console.log(`${newMovie.title} added to izzi...`);
         } else {
-          console.log(`${newMovie.title} already exists.`); // Perhaps update the movie instead.
+          // Update Movie
+          const res = await fetch(
+            `http://localhost:5000/api/movies/${existingMovie._id}`,
+            {
+              method: "PUT",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(newMovie),
+            }
+          );
+          await res.json();
+          console.log(`${newMovie.title} already exists. Updating...`);
         }
       } catch (err) {
         console.error(err);
@@ -124,11 +142,9 @@ class movieSrcAnalyzer {
           `http://localhost:5000/api/genres/${genre.name.toLowerCase()}`
         );
         let existingGenre = null;
-        console.log(res.status);
         if (res.status !== 400) existingGenre = await res.json();
         if (!existingGenre) {
           // Create new
-          console.log("RESPONSE BODY:: ", JSON.stringify({ name: genre.name }));
           const res = await fetch("http://localhost:5000/api/genres", {
             method: "POST",
             headers: {

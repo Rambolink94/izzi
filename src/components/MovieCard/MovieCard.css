@@ -1,5 +1,4 @@
-.movie-card {
-  position: relative;
+.movie-card-wrapper {
   background: #212121;
   max-width: 100%;
   width: 180px;
@@ -10,14 +9,20 @@
   overflow: hidden;
 }
 
-.movie-card .movie-card-back {
+.movie-card-wrapper .movie-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.movie-card-wrapper .movie-card .movie-card-back {
   height: 100%;
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
 
-.movie-card .card-info {
+.movie-card-wrapper .movie-card .card-info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -37,7 +42,7 @@
   transition: opacity linear 0.1s;
 }
 
-.movie-card .card-info .movie-card-title {
+.movie-card-wrapper .movie-card .card-info .movie-card-title {
   margin: 0 auto;
   display: block;
   display: -webkit-box;
@@ -53,7 +58,7 @@
   text-overflow: ellipsis;
 }
 
-.movie-card .card-info .play-button {
+.movie-card-wrapper .movie-card .card-info .play-button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -67,12 +72,22 @@
   height: 100%;
 }
 
-.movie-card .card-info .play-button img {
+.movie-card-wrapper .movie-card .card-info .play-button img {
   width: 75px;
   height: 75px;
 }
 
-.movie-card:hover .card-info, .movie-card:focus .card-info {
+.movie-card-wrapper .movie-card .card-info .genre-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.movie-card-wrapper .movie-card .card-info .genre-list li {
+  color: white;
+}
+
+.movie-card-wrapper .movie-card:hover .card-info, .movie-card-wrapper .movie-card:focus .card-info {
   opacity: 100%;
 }
 /*# sourceMappingURL=MovieCard.css.map */

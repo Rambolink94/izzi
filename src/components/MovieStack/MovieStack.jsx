@@ -1,3 +1,6 @@
+import { BrowserRouter, Link, Route } from "react-router-dom";
+import MovieCard from "../MovieCard/MovieCard";
+import Movie from "../pages/Movie/Movie";
 import React, { Component } from "react";
 import "./MovieStack.css";
 
@@ -31,7 +34,15 @@ class MovieStack extends Component {
         <h4 className="stack-title">{this.props.genre}</h4>
         <div className="stack">
           <div className="grid" ref={this.stackRef}>
-            {this.props.children}
+            <BrowserRouter>
+              {this.props.movies.map((movie, index) => (
+                <MovieCard movie={movie}>
+                  <Link key={index} to={`movie`} />
+                </MovieCard>
+              ))}
+
+              <Route path="movie" component={Movie} />
+            </BrowserRouter>
           </div>
           <div className="arrow-wrapper">
             {/* Consider making arrows components. Refactor regardless. */}

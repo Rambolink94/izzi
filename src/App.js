@@ -1,21 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import MovieCard from "./components/MovieCard/MovieCard";
 import MovieStack from "./components/MovieStack/MovieStack";
 
-class App extends React.Component {
-  state = {
-    stacks: [],
-  };
+function App() {
+  const [stacks, setStacks] = useState([]);
 
-  async componentDidMount() {
-    const stacks = await this.getMovieStacks();
-    this.setState({ stacks });
-  }
+  useEffect(() => {
+    async function setupStacks() {
+      const stacks = await getMovieStacks();
+      setStacks(stacks);
+    }
 
-  async getMovieStacks() {
+    setupStacks();
+  }, []);
+
+  const getMovieStacks = async () => {
     const stacks = [];
     // get genres
     const res = await fetch("http://localhost:5000/api/genres");
@@ -30,26 +31,20 @@ class App extends React.Component {
       })
     );
     return stacks;
-  }
+  };
 
-  render() {
-    return (
-      <div className="App">
-        <Header />
-        {this.state.stacks.map((stack, index) => {
-          console.log(stack);
-          return (
-            <MovieStack key={index} genre={stack.genre}>
-              {stack.movies.map((movie, index) => {
-                return <MovieCard key={index} movie={movie} />;
-              })}
-            </MovieStack>
-          );
-        })}
-        <Footer />
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <Header />
+      {stacks.map((stack, index) => {
+        console.log(stack);
+        return (
+          <MovieStack key={index} genre={stack.genre} movies={stack.movies} />
+        );
+      })}
+      <Footer />
+    </div>
+  );
 }
 
 export default App;

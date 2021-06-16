@@ -21,7 +21,7 @@
   display: -ms-flexbox;
   display: flex;
   padding: 0 60px;
-  overflow: hidden;
+  overflow-x: hidden;
   width: 100%;
 }
 

@@ -26,6 +26,7 @@ app.use("/api/tmdb", tmdbPaths);
 const movieSrcAnalyzer = require("../izzi-server/movieSrcAnalyzer");
 const analyzer = new movieSrcAnalyzer();
 
+//These calls need to eventually be moved elsewhere, but for now this works
 async function test() {
   const names = await analyzer.getMovieTitles();
   const ids = await analyzer.getTMDBids(names);

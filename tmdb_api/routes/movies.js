@@ -12,6 +12,7 @@ const Movie = mongoose.model(
     director: String,
     description: { type: String, required: true },
     posterPath: { type: String, required: true },
+    backdropPath: { type: String, required: true },
     videoSrc: { type: String, required: true },
     genres: {
       type: Array,
@@ -48,33 +49,55 @@ router.get("/:id", async (req, res) => {
   res.send(movie);
 });
 
-router.get("/tmdbid/", async (req, res) => {
+// Get single movie
+router.get("/title/:title", async (req, res) => {
+  const movie = await Movie.findOne({
+    title: { $regex: new RegExp(req.params.title, "i") },
+  });
+
+  console.log("TITLE");
+
+  if (!movie)
+    return res
+      .status(400)
+      .send(`The movie with name of ${req.params.title} could not be found.`);
+
+  res.send(movie);
+});
+
+/* router.get("/tmdbid/", async (req, res) => {
   let test = true;
   if (test)
     return res
       .status(400)
       .send(`No movies with tmdbID of test could be found.`);
   else res.send("Chicken");
-});
+}); */
 
 // Get movie by tmdbID
 router.get("/tmdbid/:id", async (req, res) => {
-  console.log(req.params.id);
-  const movie = await Movie.findOne({
-    tmdbID: req.params.id,
-  });
+  try {
+    const movie = await Movie.findOne({
+      tmdbID: req.params.id,
+    });
 
-  if (!movie)
-    return res
-      .status(400)
-      .send(`No movies with tmdbID of ${req.params.id} could be found.`);
-
-  res.send(movie);
+    if (!movie) {
+      res
+        .status(400)
+        .send(`No movies with tmdbID of ${req.params.id} could be found.`);
+    } else {
+      res.status(200).send(movie);
+    }
+  } catch (err) {
+    res.send(500);
+  }
 });
 
 // Get movies by genre id
 router.get("/genre/:id", async (req, res) => {
   const movies = await Movie.find({ genres: req.params.id });
+
+  console.log(`Pulled genre of id ${req.params.id}`);
 
   if (!movies)
     return res
@@ -95,6 +118,7 @@ router.post("/", async (req, res) => {
     director: req.body.director,
     description: req.body.description,
     posterPath: req.body.posterPath,
+    backdropPath: req.body.backdropPath,
     videoSrc: req.body.videoSrc,
     genres: req.body.genres,
     releaseDate: req.body.releaseDate,
@@ -118,6 +142,7 @@ router.put("/:id", async (req, res) => {
       director: req.body.director,
       description: req.body.title,
       posterPath: req.body.posterPath,
+      backdropPath: req.body.backdropPath,
       videoSrc: req.body.videoSrc,
       genres: req.body.genres,
       releaseDate: req.body.releaseDate,
@@ -155,6 +180,7 @@ function validateMovie(movie) {
     director: Joi.string(),
     description: Joi.string().required(),
     posterPath: Joi.string().required(),
+    backdropPath: Joi.string().required(),
     videoSrc: Joi.string().required(),
     genres: Joi.array().required(), // Should do more here, but this is good for now
     releaseDate: Joi.date(),
