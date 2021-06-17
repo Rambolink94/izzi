@@ -1,1 +1,8 @@
 $background-dark-theme: #141414;
+
+$primary-color: #ffe03f;
+
+@mixin convertToPrimaryFilter {
+  filter: brightness(0) invert(80%) sepia(100%) saturate(7458%)
+    hue-rotate(322deg) brightness(105%) contrast(105%);
+}

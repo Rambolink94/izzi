@@ -45,12 +45,8 @@
   list-style-type: none;
 }
 
-.nav-list li {
-  margin: 10px;
-  color: white;
-}
-
-.nav-list li a {
+.nav-list a {
+  margin: 0 20px;
   text-decoration: none;
   color: white;
 }

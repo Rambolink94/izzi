@@ -1,99 +1,39 @@
-import { BrowserRouter, Link, Route } from "react-router-dom";
 import MovieCard from "../MovieCard/MovieCard";
-import Movie from "../pages/Movie/Movie";
-import React, { Component } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./MovieStack.css";
 
-class MovieStack extends Component {
-  constructor(props) {
-    super(props);
+function MovieStack(props) {
+  const stackRef = useRef(null);
 
-    this.stackRef = React.createRef();
-  }
+  const [isAtStart, setIsAtStart] = useState(true);
+  const [isAtEnd, setIsAtEnd] = useState(false);
 
-  state = {
-    // All stacks start at start
-    isAtStart: true,
-    isAtEnd: false,
-    movies: [],
-  };
-
-  componentDidMount() {
-    window.addEventListener("resize", () => this.checkArrows());
+  useEffect(() => {
+    window.addEventListener("resize", () => checkArrows());
     //This might be causing an error
-    this.checkArrows();
-  }
+    checkArrows();
 
-  componentWillUnmount() {
-    window.removeEventListener("resize", () => this.checkArrows());
-  }
+    return () => {
+      window.removeEventListener("resize", () => checkArrows());
+    };
+  }, []);
 
-  render() {
-    return (
-      <div className="stack-wrapper">
-        <h4 className="stack-title">{this.props.genre}</h4>
-        <div className="stack">
-          <div className="grid" ref={this.stackRef}>
-            <BrowserRouter>
-              {this.props.movies.map((movie, index) => (
-                <MovieCard movie={movie}>
-                  <Link key={index} to={`movie`} />
-                </MovieCard>
-              ))}
-
-              <Route path="movie" component={Movie} />
-            </BrowserRouter>
-          </div>
-          <div className="arrow-wrapper">
-            {/* Consider making arrows components. Refactor regardless. */}
-            <div
-              className="right-arrow"
-              style={
-                !this.state.isAtEnd ? { display: "" } : { display: "none" }
-              }
-              onClick={() => this.scrollStack(false)}
-            >
-              <img
-                className="arrow"
-                src={process.env.PUBLIC_URL + "./icons/arrow.png"}
-                alt="Arrow"
-              ></img>
-            </div>
-            <div
-              className="left-arrow"
-              style={
-                !this.state.isAtStart ? { display: "" } : { display: "none" }
-              }
-              onClick={() => this.scrollStack(true)}
-            >
-              <img
-                className="arrow"
-                src={process.env.PUBLIC_URL + "./icons/arrow.png"}
-                alt="Arrow"
-              ></img>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  checkArrows = () => {
-    const stack = this.stackRef.current;
+  const checkArrows = () => {
+    const stack = stackRef.current;
+    if (!stack) return;
     const stackSize = stack.offsetWidth;
 
-    if (stack.scrollLeft <= 0) this.setState({ isAtStart: true });
-    else this.setState({ isAtStart: false });
+    if (stack.scrollLeft <= 0) setIsAtStart(true);
+    else setIsAtStart(false);
 
     // Check if right should render
     console.log(stack.scrollLeft, ":", stackSize, " => ", stack.scrollWidth);
-    if (stack.scrollLeft + stackSize >= stack.scrollWidth)
-      this.setState({ isAtEnd: true });
-    else this.setState({ isAtEnd: false });
+    if (stack.scrollLeft + stackSize >= stack.scrollWidth) setIsAtEnd(true);
+    else setIsAtEnd(false);
   };
 
-  scrollStack = (isLeft = true) => {
-    const stack = this.stackRef.current;
+  const scrollStack = (isLeft = true) => {
+    const stack = stackRef.current;
     const stackSize = stack.offsetWidth;
 
     console.log("Stack Size:", stackSize);
@@ -102,8 +42,8 @@ class MovieStack extends Component {
     if (isLeft) {
       console.log("Scroll: ", stack.scrollLeft - stackSize, " - ", 0);
       stack.scrollBy({ top: 0, left: -stackSize, behavior: "smooth" });
-      if (stack.scrollLeft - stackSize <= 0) this.setState({ isAtStart: true });
-      this.setState({ isAtEnd: false });
+      if (stack.scrollLeft - stackSize <= 0) setIsAtStart(true);
+      setIsAtEnd(false);
     } else {
       console.log(
         "Scroll: ",
@@ -113,13 +53,50 @@ class MovieStack extends Component {
       );
       stack.scrollBy({ top: 0, left: stackSize, behavior: "smooth" });
       if (stack.scrollWidth - (stack.scrollLeft + stackSize) < stackSize)
-        this.setState({ isAtEnd: true });
-      this.setState({ isAtStart: false });
+        setIsAtEnd(true);
+      setIsAtStart(false);
     }
 
     console.log(stack.scrollWidth - stack.scrollLeft, " < ", stackSize);
-    //(stack.scrollLeft) ? this.setState({ isAtStart: false }) : this.setState({ isAtStart: true });
   };
+
+  return (
+    <div className="stack-wrapper">
+      <h4 className="stack-title">{props.genre}</h4>
+      <div className="stack">
+        <div className="grid" ref={stackRef}>
+          {props.movies.map((movie, index) => (
+            <MovieCard key={index} movie={movie} />
+          ))}
+        </div>
+        <div className="arrow-wrapper">
+          {/* Consider making arrows components. Refactor regardless. */}
+          <div
+            className="right-arrow"
+            style={!isAtEnd ? { display: "" } : { display: "none" }}
+            onClick={() => scrollStack(false)}
+          >
+            <img
+              className="arrow"
+              src={process.env.PUBLIC_URL + "./icons/arrow.png"}
+              alt="Arrow"
+            ></img>
+          </div>
+          <div
+            className="left-arrow"
+            style={!isAtStart ? { display: "" } : { display: "none" }}
+            onClick={() => scrollStack(true)}
+          >
+            <img
+              className="arrow"
+              src={process.env.PUBLIC_URL + "./icons/arrow.png"}
+              alt="Arrow"
+            ></img>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default MovieStack;
