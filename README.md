@@ -15,5 +15,7 @@ node index.js
 
 The backend currently initializes and updates the entire list of movies each time you start the server. This will definitely need to be changed. However, I may rewrite the server app in C# and .NET anyway.
 
+And there you go! The app should now be up and running and you can start streaming any of your movies to your local network.
+
 ![image](https://user-images.githubusercontent.com/31221007/133019086-5f6b39a3-a43f-48ed-841e-68e50be1f4fb.png)
 
