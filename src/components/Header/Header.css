@@ -26,12 +26,53 @@
   height: 100%;
 }
 
+.header-user-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  /* This needs work */
+}
+
 .header-user-wrapper > * {
   margin-right: 20px;
 }
 
+.header-user-wrapper .search-icon {
+  cursor: pointer;
+  font-size: 1.3em;
+}
+
+.header-user-wrapper .notification-icon {
+  cursor: pointer;
+  font-size: 1.3em;
+}
+
 .header-user-wrapper .profile-pic-small {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   border-radius: 50%;
+  background-color: #3f51b5;
+  width: 40px;
+  height: 40px;
+}
+
+.header-user-wrapper .profile-text {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: white;
 }
 
 .logo-large {

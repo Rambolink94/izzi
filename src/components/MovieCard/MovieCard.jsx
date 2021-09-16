@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./MovieCard.css";
 
 function MovieCard(props) {
@@ -24,10 +25,7 @@ function MovieCard(props) {
             <h5 className="movie-card-title">{title}</h5>
             <div className="play-button">
               {props.children}
-              <img
-                src={process.env.PUBLIC_URL + "./icons/play-button.png"}
-                alt="Play Button"
-              />
+              <FontAwesomeIcon icon="play" size="3x" color="white" />
             </div>
           </div>
         </Link>

@@ -1,14 +1,29 @@
 const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
+const dotenv = require("dotenv");
 
-// Make an environment variable
-const API_KEY = "3c0b460139111299f2e29be8ee3986cc";
+dotenv.config();
+
+const API_KEY = process.env.TMDB_API_KEY;
 
 router.get("/:name", async (req, res) => {
   try {
+    // Make adult search optional
     const response = await fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${req.params.name}&page=1&include_adult=true`
+      `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${req.params.name}`
+    );
+    const results = await response.json();
+    res.send(results);
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+router.get("/id/:id", async (req, res) => {
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${req.params.id}?api_key=${API_KEY}&language=en-US`
     );
     const results = await response.json();
     res.send(results);

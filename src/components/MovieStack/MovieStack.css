@@ -4,12 +4,46 @@
   margin-bottom: 50px;
 }
 
+.stack-wrapper :hover .more-options {
+  display: block;
+}
+
 .stack-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
   text-align: left;
   padding: 20px 60px;
   margin: 0;
   font-size: 1.5em;
   color: white;
+}
+
+.stack-title :hover .view-all-text {
+  opacity: 1;
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+}
+
+.stack-title .view-all-text {
+  color: #ffe03f;
+  font-size: 0.7em;
+  font-weight: bold;
+  margin-left: 20px;
+  /*
+    opacity: 0;
+    transform: scaleX(0);
+    */
+  -webkit-transition: all 0.1ms ease-out;
+  transition: all 0.1ms ease-out;
+}
+
+.stack-title .more-options {
+  display: none;
+  margin: 0 10px;
 }
 
 .stack {
@@ -77,14 +111,5 @@
 
 .left-arrow:hover {
   background-color: rgba(0, 0, 0, 0.411);
-}
-
-.left-arrow .arrow {
-  -webkit-transform: rotateY(180deg);
-          transform: rotateY(180deg);
-}
-
-.arrow {
-  width: 80%;
 }
 /*# sourceMappingURL=MovieStack.css.map */

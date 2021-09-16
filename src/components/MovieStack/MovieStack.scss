@@ -1,17 +1,50 @@
 @import "../../utility/css/sizing";
+@import "../../utility/css/colors";
 
 .stack-wrapper {
   position: relative;
   width: 100%;
   margin-bottom: 50px;
+
+  :hover {
+    .more-options {
+      display: block;
+    }
+  }
 }
 
 .stack-title {
+  display: flex;
+  align-items: flex-end;
   text-align: left;
   padding: 20px $stack-side-width;
   margin: 0;
   font-size: 1.5em;
   color: white;
+
+  :hover {
+    .view-all-text {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  }
+
+  .view-all-text {
+    color: $primary-color;
+    font-size: 0.7em;
+    font-weight: bold;
+    margin-left: 20px;
+    /*
+    opacity: 0;
+    transform: scaleX(0);
+    */
+    transition: all 0.1ms ease-out;
+  }
+
+  .more-options {
+    display: none;
+    margin: 0 10px;
+  }
 }
 
 .stack {
@@ -53,12 +86,4 @@
 .left-arrow {
   @include arrow;
   left: 0;
-
-  .arrow {
-    transform: rotateY(180deg);
-  }
-}
-
-.arrow {
-  width: 80%;
 }

@@ -1,4 +1,5 @@
 import { useHistory, useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Movie.css";
 
 function Movie() {
@@ -10,11 +11,21 @@ function Movie() {
     return extension;
   };
 
-  const { title, videoSrc } = location.state;
+  const baseUrl = "https://image.tmdb.org/t/p/";
+  const sizeUrl = "w500/";
+
+  const { title, backdropPath, videoSrc } = location.state;
 
   return (
     <div className="player-wrapper">
-      <video className="player" width="320" height="240" controls autoPlay>
+      <video
+        className="player"
+        width="320"
+        height="240"
+        controls
+        autoPlay
+        poster={`${baseUrl}${sizeUrl}${backdropPath}`}
+      >
         {console.log(`D:\\Knight's Movies\\${videoSrc}`)}
         <source
           src={`http://10.0.0.158:5000/api/streaming/video/${videoSrc}`}
@@ -24,17 +35,11 @@ function Movie() {
       </video>
       <div className="page-functions">
         <button className="transparent-button" onClick={() => history.goBack()}>
-          <img
-            src={process.env.PUBLIC_URL + "../icons/back-arrow.png"}
-            alt="Go Back"
-          />
+          <FontAwesomeIcon icon="arrow-alt-circle-left" size="3x" inverse />
         </button>
         <h1 className="movie-title">{title}</h1>
         <button className="transparent-button options-button">
-          <img
-            src={process.env.PUBLIC_URL + "../icons/ellipsis-v.svg"}
-            alt="Options"
-          />
+          <FontAwesomeIcon icon="ellipsis-v" size="2x" inverse />
         </button>
       </div>
     </div>

@@ -7,6 +7,9 @@ const movies = require("./routes/movies");
 const streaming = require("./routes/streaming");
 const genres = require("./routes/genres");
 const tmdbPaths = require("./routes/tmdb-paths");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 mongoose
   .connect("mongodb://localhost/izzi", {
@@ -22,22 +25,22 @@ app.use(express.json());
 app.use("/api/search/", search);
 app.use("/api/movies/", movies);
 app.use("/api/streaming/", streaming);
-app.use("/api/genres", genres);
-app.use("/api/tmdb", tmdbPaths);
+app.use("/api/genres/", genres);
+app.use("/api/tmdb/", tmdbPaths);
 
 const movieSrcAnalyzer = require("../izzi-server/movieSrcAnalyzer");
 const analyzer = new movieSrcAnalyzer();
 
 //These calls need to eventually be moved elsewhere, but for now this works
-async function test() {
+async function beginAnalysis() {
   const names = await analyzer.getMovieTitles();
   const ids = await analyzer.getTMDBids(names, false);
-  //await analyzer.createMovies(results.ids);
+  await analyzer.createMovies(ids);
   console.log("DONE!");
 }
 
-test();
+//beginAnalysis();
 
 // This will probably fail on some systems if something is already listening on this port
-const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Listening on port ${port}...`));
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Listening on port ${process.env.PORT}...`));

@@ -1,5 +1,6 @@
 import MovieCard from "../MovieCard/MovieCard";
 import React, { useEffect, useState, useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./MovieStack.css";
 
 function MovieStack(props) {
@@ -62,7 +63,11 @@ function MovieStack(props) {
 
   return (
     <div className="stack-wrapper">
-      <h4 className="stack-title">{props.genre}</h4>
+      <div className="stack-title">
+        <h4 className="genre-name">{props.genre}</h4>
+        <p className="view-all-text">View All</p>
+        <FontAwesomeIcon className="more-options" icon="chevron-right" />
+      </div>
       <div className="stack">
         <div className="grid" ref={stackRef}>
           {props.movies.map((movie, index) => (
@@ -76,22 +81,24 @@ function MovieStack(props) {
             style={!isAtEnd ? { display: "" } : { display: "none" }}
             onClick={() => scrollStack(false)}
           >
-            <img
+            <FontAwesomeIcon
               className="arrow"
-              src={process.env.PUBLIC_URL + "./icons/arrow.png"}
-              alt="Arrow"
-            ></img>
+              icon="chevron-right"
+              size="4x"
+              inverse
+            />
           </div>
           <div
             className="left-arrow"
             style={!isAtStart ? { display: "" } : { display: "none" }}
             onClick={() => scrollStack(true)}
           >
-            <img
+            <FontAwesomeIcon
               className="arrow"
-              src={process.env.PUBLIC_URL + "./icons/arrow.png"}
-              alt="Arrow"
-            ></img>
+              icon="chevron-left"
+              size="4x"
+              inverse
+            />
           </div>
         </div>
       </div>

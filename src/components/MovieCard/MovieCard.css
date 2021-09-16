@@ -58,6 +58,14 @@
   text-overflow: ellipsis;
 }
 
+.movie-card-wrapper .movie-card .card-info .movie-card-title::after {
+  content: "";
+  display: block;
+  border-bottom: solid 2px white;
+  width: 100%;
+  height: 10px;
+}
+
 .movie-card-wrapper .movie-card .card-info .play-button {
   display: -webkit-box;
   display: -ms-flexbox;

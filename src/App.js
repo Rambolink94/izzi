@@ -1,10 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faArrowAltCircleLeft,
+  faArrowLeft,
+  faPlay,
+  faChevronLeft,
+  faChevronRight,
+  faInfoCircle,
+  faSearch,
+  faEllipsisV,
+  faBell,
+} from "@fortawesome/free-solid-svg-icons";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import MovieStack from "./components/MovieStack/MovieStack";
 import Movie from "./components/pages/Movie/Movie";
+
+library.add(
+  faArrowAltCircleLeft,
+  faArrowLeft,
+  faPlay,
+  faChevronLeft,
+  faChevronRight,
+  faInfoCircle,
+  faSearch,
+  faEllipsisV,
+  faBell
+);
 
 function App() {
   const [stacks, setStacks] = useState([]);
@@ -46,13 +70,15 @@ function App() {
             <Header />
             {stacks.map((stack, index) => {
               console.log(stack);
-              return (
-                <MovieStack
-                  key={index}
-                  genre={stack.genre}
-                  movies={stack.movies}
-                />
-              );
+              if (stack.movies.length > 0) {
+                return (
+                  <MovieStack
+                    key={index}
+                    genre={stack.genre}
+                    movies={stack.movies}
+                  />
+                );
+              }
             })}
             <Footer />
           </Route>
