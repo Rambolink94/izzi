@@ -1,0 +1,20 @@
+.grid-parent {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(180px, 180px))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(180px, 180px));
+  -ms-grid-rows: (minmax(250px, 250px))[auto-fit];
+      grid-template-rows: repeat(auto-fit, minmax(250px, 250px));
+  -ms-grid-column-align: start;
+      justify-self: start;
+  width: 100%;
+  min-height: 1000px;
+  gap: 15px 10px;
+  padding: 0 60px;
+}
+
+.grid-card {
+  display: -ms-inline-grid;
+  display: inline-grid;
+}
+/*# sourceMappingURL=MovieGrid.css.map */

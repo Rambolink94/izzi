@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Header.css";
 
-function Header(props) {
+function Header() {
   return (
     <header className="header-wrapper">
       <div className="header-content">
@@ -11,13 +11,15 @@ function Header(props) {
         <div className="header-nav-wrapper">
           <nav className="nav-list">
             <Link to="/">Home</Link>
-            <Link to="/genres">Genres</Link>
+            {/*<Link to="/genres">Genres</Link>*/}
             <Link to="/movies">Movies</Link>
             <Link to="/tvshows">TV Shows</Link>
           </nav>
         </div>
         <div className="header-user-wrapper">
-          <FontAwesomeIcon icon="search" className="search-icon" inverse />
+          <Link to="/search">
+            <FontAwesomeIcon icon="search" className="search-icon" inverse />
+          </Link>
           <FontAwesomeIcon icon="bell" className="notification-icon" inverse />
           <div className="profile-pic-small">
             <p className="profile-text">KS</p>

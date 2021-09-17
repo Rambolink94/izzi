@@ -89,10 +89,12 @@ class movieSrcAnalyzer {
                   " -- MY MOVIE: ",
                   name
                 );
+                ids.push({ id: null, path: originalName });
               }
             }
           }
         } else {
+          ids.push({ id: null, path: originalName });
           missing.push(name);
         }
         if (isTest && testCount <= 0) break;

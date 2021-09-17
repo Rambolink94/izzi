@@ -1,5 +1,6 @@
 import MovieCard from "../MovieCard/MovieCard";
 import React, { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./MovieStack.css";
 
@@ -64,9 +65,15 @@ function MovieStack(props) {
   return (
     <div className="stack-wrapper">
       <div className="stack-title">
-        <h4 className="genre-name">{props.genre}</h4>
-        <p className="view-all-text">View All</p>
-        <FontAwesomeIcon className="more-options" icon="chevron-right" />
+        <h4 className="genre-name">{props.genre.name}</h4>
+        <Link
+          to={{
+            pathname: `genre/${props.genre.name}`,
+            state: { genre: props.genre },
+          }}
+        >
+          <p className="view-all-text">View All</p>
+        </Link>
       </div>
       <div className="stack">
         <div className="grid" ref={stackRef}>

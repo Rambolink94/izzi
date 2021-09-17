@@ -1,0 +1,15 @@
+@import "../../../utility/css/colors";
+@import "../../../utility/css/sizing";
+
+.genre-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px $stack-side-width;
+}
+
+.genre-title {
+  color: $primary-color;
+  font-size: 2em;
+  letter-spacing: 1.5px;
+}

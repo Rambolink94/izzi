@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,YAAY,CAAC;EACX,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAE,sCAGtB;EACD,kBAAkB,EAAE,sCAGnB;EACD,YAAY,EAAE,KAAK;EACnB,KAAK,EAAE,IAAI;EACX,UAAU,EAAE,MAAM;EAClB,GAAG,EAAE,SAAS;EACd,OAAO,EAAE,CAAC,CCVO,IAAI;CDWtB;;AAED,AAAA,UAAU,CAAC;EACT,OAAO,EAAE,WAAW;CACrB",
+    "sources": [
+        "MovieGrid.scss",
+        "../../utility/css/_sizing.scss"
+    ],
+    "names": [],
+    "file": "MovieGrid.css"
+}

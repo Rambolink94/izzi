@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "AAGA,AAAA,cAAc,CAAC;EACb,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,aAAa;EAC9B,WAAW,EAAE,MAAM;EACnB,OAAO,EAAE,IAAI,CEDI,IAAI;CFEtB;;AAED,AAAA,YAAY,CAAC;EACX,KAAK,ECTS,OAAO;EDUrB,SAAS,EAAE,GAAG;EACd,cAAc,EAAE,KAAK;CACtB",
+    "sources": [
+        "Genre.scss",
+        "../../../utility/css/_colors.scss",
+        "../../../utility/css/_sizing.scss"
+    ],
+    "names": [],
+    "file": "Genre.css"
+}

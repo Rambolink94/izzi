@@ -72,4 +72,9 @@
     text-decoration: none;
     color: white;
   }
+
+  a:hover {
+    color: $primary-color;
+    transform: scale(1.1);
+  }
 }

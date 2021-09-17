@@ -20,7 +20,10 @@ function MovieCard(props) {
           src={baseUrl + sizeUrl + posterPath}
           alt={title}
         />
-        <Link to={{ pathname: `movie/${props.movie._id}`, state: props.movie }}>
+        <Link
+          to={{ pathname: `/movie/${props.movie._id}`, state: props.movie }}
+        >
+          {console.log(props.movie)}
           <div className="card-info">
             <h5 className="movie-card-title">{title}</h5>
             <div className="play-button">

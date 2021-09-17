@@ -11,12 +11,20 @@ import {
   faSearch,
   faEllipsisV,
   faBell,
+  faFilter,
+  faSort,
+  faSortAlphaDown,
+  faSortAlphaDownAlt,
+  faThList,
+  faThLarge,
 } from "@fortawesome/free-solid-svg-icons";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import MovieStack from "./components/MovieStack/MovieStack";
 import Movie from "./components/pages/Movie/Movie";
+import Genre from "./components/pages/Genre/Genre";
+import Search from "./components/pages/Search/Search";
 
 library.add(
   faArrowAltCircleLeft,
@@ -27,7 +35,13 @@ library.add(
   faInfoCircle,
   faSearch,
   faEllipsisV,
-  faBell
+  faBell,
+  faFilter,
+  faSort,
+  faSortAlphaDown,
+  faSortAlphaDownAlt,
+  faThList,
+  faThLarge
 );
 
 function App() {
@@ -50,12 +64,11 @@ function App() {
 
     await Promise.all(
       genres.map(async (genre) => {
-        const id = genre._id;
         const res = await fetch(
-          `http://10.0.0.158:5000/api/movies/genre/${id}`
+          `http://10.0.0.158:5000/api/movies/genre/${genre._id}`
         );
         const movies = await res.json();
-        stacks.push({ id: id, genre: genre.name, movies: movies });
+        stacks.push({ genre: genre, movies: movies });
       })
     );
     return stacks;
@@ -69,7 +82,6 @@ function App() {
           <Route exact path="/">
             <Header />
             {stacks.map((stack, index) => {
-              console.log(stack);
               if (stack.movies.length > 0) {
                 return (
                   <MovieStack
@@ -78,12 +90,20 @@ function App() {
                     movies={stack.movies}
                   />
                 );
+              } else {
+                return null;
               }
             })}
             <Footer />
           </Route>
           <Route path="/movie">
             <Movie />
+          </Route>
+          <Route path="/genre">
+            <Genre />
+          </Route>
+          <Route path="/search">
+            <Search />
           </Route>
         </Switch>
       </div>

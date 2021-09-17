@@ -1,0 +1,22 @@
+@import "../../utility/css/sizing";
+
+.grid-parent {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax($movie-card-width, $movie-card-width)
+  );
+  grid-template-rows: repeat(
+    auto-fit,
+    minmax($movie-card-height, $movie-card-height)
+  );
+  justify-self: start;
+  width: 100%;
+  min-height: 1000px;
+  gap: 15px 10px;
+  padding: 0 $stack-side-width;
+}
+
+.grid-card {
+  display: inline-grid;
+}

@@ -1,0 +1,21 @@
+@import "../../../utility/css/sizing";
+
+.search-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  padding: 10px $stack-side-width;
+}
+
+.horizontal-icons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 2em;
+  margin-left: 20px;
+
+  & > * {
+    padding: 5px;
+  }
+}

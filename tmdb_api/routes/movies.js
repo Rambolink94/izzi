@@ -65,6 +65,31 @@ router.get("/title/:title", async (req, res) => {
   res.send(movie);
 });
 
+// Get all movies that match query
+router.get("/search/:query", async (req, res) => {
+  console.log(req.params.query.length);
+  if (req.params.query.length > 0) {
+    try {
+      const movies = await Movie.find({
+        title: { $regex: new RegExp(req.params.query, "i") },
+      });
+
+      if (!movies)
+        return res
+          .status(400)
+          .send(`No movies match query ${req.params.query}.`);
+
+      console.log(movies);
+      res.send(movies);
+    } catch (e) {
+      console.log("FAIL");
+      console.error(e);
+    }
+  } else {
+    res.send([]);
+  }
+});
+
 /* router.get("/tmdbid/", async (req, res) => {
   let test = true;
   if (test)

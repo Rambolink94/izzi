@@ -91,4 +91,10 @@
   text-decoration: none;
   color: white;
 }
+
+.nav-list a:hover {
+  color: #ffe03f;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
 /*# sourceMappingURL=Header.css.map */
