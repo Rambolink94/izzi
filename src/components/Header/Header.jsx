@@ -3,20 +3,26 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Header.css";
 
-function Header() {
+function Header(props) {
   return (
     <header className="header-wrapper">
       <div className="header-content">
         <h1 className="logo-large">izzi</h1>
-        <div className="header-nav-wrapper">
+        <div
+          className={"header-nav-wrapper" + (props.simplify ? " simplify" : "")}
+        >
           <nav className="nav-list">
-            <Link to="/">Home</Link>
+            <Link to="/home">Home</Link>
             {/*<Link to="/genres">Genres</Link>*/}
             <Link to="/movies">Movies</Link>
             <Link to="/tvshows">TV Shows</Link>
           </nav>
         </div>
-        <div className="header-user-wrapper">
+        <div
+          className={
+            "header-user-wrapper" + (props.simplify ? " simplify" : "")
+          }
+        >
           <Link to="/search">
             <FontAwesomeIcon icon="search" className="search-icon" inverse />
           </Link>

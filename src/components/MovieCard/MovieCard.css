@@ -98,4 +98,22 @@
 .movie-card-wrapper .movie-card:hover .card-info, .movie-card-wrapper .movie-card:focus .card-info {
   opacity: 100%;
 }
+
+.movie-card-wrapper .movie-card .progress-bar-background {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 6px;
+  background-color: #141414;
+}
+
+.movie-card-wrapper .movie-card .progress-bar {
+  position: absolute;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background-color: red;
+}
 /*# sourceMappingURL=MovieCard.css.map */

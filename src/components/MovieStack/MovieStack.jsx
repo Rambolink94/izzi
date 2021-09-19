@@ -29,7 +29,6 @@ function MovieStack(props) {
     else setIsAtStart(false);
 
     // Check if right should render
-    console.log(stack.scrollLeft, ":", stackSize, " => ", stack.scrollWidth);
     if (stack.scrollLeft + stackSize >= stack.scrollWidth) setIsAtEnd(true);
     else setIsAtEnd(false);
   };
@@ -78,7 +77,7 @@ function MovieStack(props) {
       <div className="stack">
         <div className="grid" ref={stackRef}>
           {props.movies.map((movie, index) => (
-            <MovieCard key={index} movie={movie} />
+            <MovieCard key={index} movie={movie} user={props.user} />
           ))}
         </div>
         <div className="arrow-wrapper">

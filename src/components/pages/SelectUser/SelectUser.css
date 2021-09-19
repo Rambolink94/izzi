@@ -1,0 +1,64 @@
+.select-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.grid-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 10%;
+}
+
+.grid-wrapper .select-user {
+  font-size: 2.5em;
+  color: #ffe03f;
+  margin-bottom: 50px;
+}
+
+.grid-wrapper .user-grid {
+  width: 100%;
+  display: -ms-inline-grid;
+  display: inline-grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-grid-columns: (minmax(180px, 180px))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(180px, 180px));
+  -ms-grid-rows: (minmax(180px, 180px))[auto-fit];
+      grid-template-rows: repeat(auto-fit, minmax(180px, 180px));
+  gap: 10px;
+}
+
+.grid-wrapper .user-grid .user-grid-element {
+  background: -webkit-gradient(linear, left top, left bottom, from(black), to(#141414));
+  background: linear-gradient(black, #141414);
+  border-radius: 8px;
+  border: 3px solid #3d3d3d;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  transition: transform 0.2s, -webkit-transform 0.2s;
+}
+
+.grid-wrapper .user-grid .user-grid-element:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  cursor: pointer;
+}
+
+.grid-wrapper .user-grid .user-grid-element .element-icon {
+  width: 100%;
+  height: 100%;
+  padding: 25%;
+}
+/*# sourceMappingURL=SelectUser.css.map */

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -17,14 +17,16 @@ import {
   faSortAlphaDownAlt,
   faThList,
   faThLarge,
+  faPlus,
+  faCheck,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import "./App.css";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import MovieStack from "./components/MovieStack/MovieStack";
+import SelectUser from "./components/pages/SelectUser/SelectUser";
 import Movie from "./components/pages/Movie/Movie";
 import Genre from "./components/pages/Genre/Genre";
 import Search from "./components/pages/Search/Search";
+import Home from "./components/pages/Home/Home";
 
 library.add(
   faArrowAltCircleLeft,
@@ -41,60 +43,23 @@ library.add(
   faSortAlphaDown,
   faSortAlphaDownAlt,
   faThList,
-  faThLarge
+  faThLarge,
+  faPlus,
+  faCheck,
+  faTimes
 );
 
 function App() {
-  const [stacks, setStacks] = useState([]);
-
-  useEffect(() => {
-    async function setupStacks() {
-      const stacks = await getMovieStacks();
-      setStacks(stacks);
-    }
-
-    setupStacks();
-  }, []);
-
-  const getMovieStacks = async () => {
-    const stacks = [];
-    // get genres
-    const res = await fetch("http://10.0.0.158:5000/api/genres");
-    const genres = await res.json();
-
-    await Promise.all(
-      genres.map(async (genre) => {
-        const res = await fetch(
-          `http://10.0.0.158:5000/api/movies/genre/${genre._id}`
-        );
-        const movies = await res.json();
-        stacks.push({ genre: genre, movies: movies });
-      })
-    );
-    return stacks;
-  };
-
   return (
     <Router>
       <div className="App">
         <Switch>
           {/* Default path */}
           <Route exact path="/">
-            <Header />
-            {stacks.map((stack, index) => {
-              if (stack.movies.length > 0) {
-                return (
-                  <MovieStack
-                    key={index}
-                    genre={stack.genre}
-                    movies={stack.movies}
-                  />
-                );
-              } else {
-                return null;
-              }
-            })}
-            <Footer />
+            <SelectUser />
+          </Route>
+          <Route path="/Home">
+            <Home />
           </Route>
           <Route path="/movie">
             <Movie />

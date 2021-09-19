@@ -1,0 +1,156 @@
+@import "../../utility/css/colors";
+
+.modal-parent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.158);
+  z-index: 100;
+
+  .modal-container {
+    position: relative;
+    background-color: $background-dark-theme;
+    border-radius: 8px;
+    border: 3px solid $primary-color;
+    padding: 40px 60px;
+    z-index: 200;
+    box-shadow: 1px 1px 20px 11px $primary-color-low-alpha;
+
+    .input-wrapper {
+      width: 100%;
+      margin: 10px 0;
+    }
+
+    .x-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 30px;
+      height: 30px;
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    h2 {
+      color: $primary-color;
+      margin-bottom: 20px;
+    }
+
+    .user-details {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      label {
+        color: white;
+        margin-left: 5px;
+        font-size: large;
+      }
+
+      .username {
+        background-color: $background-dark-theme;
+        color: white;
+        padding: 20px 5px;
+        border: none;
+        border-bottom: 2px solid $border-color;
+        transition: border 0.1s;
+
+        &:focus {
+          outline: none;
+          border-bottom: 2px solid $primary-color;
+        }
+      }
+
+      .bad-input {
+        border-bottom: 2px solid red;
+
+        ::placeholder {
+          color: red;
+        }
+      }
+
+      .btn {
+        background-color: $background-dark-theme;
+        border: 2px solid $border-color;
+        font-size: medium;
+        color: $primary-color;
+        padding: 10px 20px;
+        margin: 10px;
+        transition: all 0.1s;
+        cursor: pointer;
+      }
+
+      .primary {
+        background-color: $primary-color;
+        color: $background-dark-theme;
+      }
+
+      /*
+        Checkbox stuff
+        https://www.w3schools.com/howto/howto_css_custom_checkbox.asp
+      */
+      .check-container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      /* Hide the browser's default checkbox */
+      .check-container {
+        input {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+          height: 0;
+          width: 0;
+        }
+      }
+
+      /* Create a custom checkbox */
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 30px;
+        width: 30px;
+        background-color: $background-dark-theme;
+        border: 2px solid $border-color;
+        cursor: pointer;
+
+        .check {
+          display: none;
+          width: 100%;
+          height: 100%;
+          padding: 5px;
+          color: $border-color;
+        }
+      }
+
+      .check-container:hover input ~ .checkmark {
+        background-color: $primary-color-low-alpha;
+      }
+
+      /* Show the checkmark when checked */
+      .check-container input:checked + span .check {
+        display: block;
+      }
+    }
+  }
+}

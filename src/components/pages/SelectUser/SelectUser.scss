@@ -1,0 +1,55 @@
+@import "../../../utility/css/sizing";
+@import "../../../utility/css/colors";
+
+.select-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.grid-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10%;
+
+  .select-user {
+    font-size: 2.5em;
+    color: $primary-color;
+    margin-bottom: 50px;
+  }
+
+  .user-grid {
+    width: 100%;
+    display: inline-grid;
+    justify-content: center;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax($movie-card-width, $movie-card-width)
+    );
+    grid-template-rows: repeat(
+      auto-fit,
+      minmax($movie-card-width, $movie-card-width)
+    );
+    gap: 10px;
+
+    .user-grid-element {
+      background: linear-gradient(black, #141414);
+      border-radius: 8px;
+      border: 3px solid #3d3d3d;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.2s;
+
+      &:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+      }
+
+      .element-icon {
+        width: 100%;
+        height: 100%;
+        padding: 25%;
+      }
+    }
+  }
+}

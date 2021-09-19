@@ -6,6 +6,7 @@ const search = require("./routes/search");
 const movies = require("./routes/movies");
 const streaming = require("./routes/streaming");
 const genres = require("./routes/genres");
+const users = require("./routes/users");
 const tmdbPaths = require("./routes/tmdb-paths");
 const dotenv = require("dotenv");
 
@@ -26,6 +27,7 @@ app.use("/api/search/", search);
 app.use("/api/movies/", movies);
 app.use("/api/streaming/", streaming);
 app.use("/api/genres/", genres);
+app.use("/api/users/", users);
 app.use("/api/tmdb/", tmdbPaths);
 
 const movieSrcAnalyzer = require("../izzi-server/movieSrcAnalyzer");

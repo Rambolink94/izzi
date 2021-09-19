@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./SearchBar.css";
 
 function SearchBar(props) {
-  const [searchValue, setSearchValue] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
 
   const onInputChanged = (event) => {
     const value = event.target.value;

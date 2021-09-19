@@ -26,6 +26,10 @@
   height: 100%;
 }
 
+.header-content .simplify {
+  visibility: hidden;
+}
+
 .header-user-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
