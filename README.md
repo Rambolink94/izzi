@@ -17,5 +17,5 @@ The backend currently initializes and updates the entire list of movies each tim
 
 And there you go! The app should now be up and running and you can start streaming any of your movies to your local network.
 
-![image](https://user-images.githubusercontent.com/31221007/133019086-5f6b39a3-a43f-48ed-841e-68e50be1f4fb.png)
+![image](https://user-images.githubusercontent.com/31221007/133735434-b85e9f2a-05f9-48fc-a946-e6b92288bb9b.png)
 
