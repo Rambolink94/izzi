@@ -10,7 +10,7 @@ npm start
 # Start the backend
 ```sh
 nodemon tmdb_api
-or
+// or
 node tmdb_api
 ```
 
