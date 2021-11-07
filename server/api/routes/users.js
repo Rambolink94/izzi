@@ -19,6 +19,7 @@ const UserProgressEntry = mongoose.model(
     userId: { type: mongoose.Schema.Types.ObjectId, required: true },
     movieId: { type: mongoose.Schema.Types.ObjectId, required: true },
     timeElapsed: { type: Number, required: true },
+    runtime: { type: Number, required: true },
   })
 );
 
@@ -36,23 +37,28 @@ router.get("/:id", async (req, res) => {
 
 // Get user progress on movie
 router.get("/progress/:userId/:movieId", async (req, res) => {
-  console.log(req.params);
   const movieProgress = await UserProgressEntry.findOne({
     userId: req.params.userId,
     movieId: req.params.movieId,
   });
-  console.log(movieProgress);
-  res.send(movieProgress);
+  res.send(movieProgress ? movieProgress : "0");
 });
 
 // Add new or update movie progress for user
-router.post("/progress/:userId/:movieId", async (req, res) => {
+router.post("/progress", async (req, res) => {
+  console.log(req.body);
   const { error } = validateUserProgressEntry(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   UserProgressEntry.findOneAndUpdate(
-    { userId: req.body.userId, movieId: req.body.movieId },
-    req.body,
+    {
+      userId: req.body.userId,
+      movieId: req.body.movieId,
+    },
+    {
+      timeElapsed: req.body.timeElapsed,
+      runtime: req.body.runtime,
+    },
     { upsert: true },
     (error) => {
       if (error) return res.send(500, { error: error });
@@ -129,6 +135,7 @@ function validateUserProgressEntry(entry) {
     userId: Joi.objectId().required(),
     movieId: Joi.objectId().required(),
     timeElapsed: Joi.number().required(),
+    runtime: Joi.number().required(),
   });
 
   return schema.validate(entry);

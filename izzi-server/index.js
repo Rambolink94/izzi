@@ -1,4 +1,4 @@
-const movieSrcAnalyzer = require("./movieSrcAnalyzer");
+const movieSrcAnalyzer = require("../server/utility/movieSrcAnalyzer");
 const analyzer = new movieSrcAnalyzer();
 
 async function test() {

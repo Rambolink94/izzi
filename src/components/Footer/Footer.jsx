@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 
 class Footer extends Component {
@@ -7,15 +8,13 @@ class Footer extends Component {
     return (
       <footer className="footer">
         <nav className="footer-links">
-          <ul>
-            <li>Link</li>
-            <li>Link</li>
-            <li>Link</li>
-            <li>Link</li>
-          </ul>
+          <Link to="/home">Home</Link>
+          {/*<Link to="/genres">Genres</Link>*/}
+          <Link to="/movies">Movies</Link>
+          <Link to="/tvshows">TV Shows</Link>
         </nav>
         <h2 className="logo-medium">izzi</h2>
-        <div className="socials">
+        <div className="socials" style={{ visibility: "hidden" }}>
           <img src="https://source.unsplash.com/random/40x40" alt="" />
           <img src="https://source.unsplash.com/random/40x40" alt="" />
           <img src="https://source.unsplash.com/random/40x40" alt="" />

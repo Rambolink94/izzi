@@ -6,7 +6,7 @@ import UserCard from "../../UserCard/UserCard";
 import UserCreationModal from "../../UserCreationModal/UserCreationModal";
 import "./SelectUser.css";
 
-function SelectUser(props) {
+function SelectUser() {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState([]);
   const [isModalActive, setIsModalActive] = useState([]);
@@ -55,6 +55,11 @@ function SelectUser(props) {
     setIsModalActive(false);
   };
 
+  const storeUser = (user) => {
+    console.log("USER:", user);
+    localStorage.setItem("user", JSON.stringify(user));
+  };
+
   return (
     <div className="select-wrapper">
       <Header simplify={true} />
@@ -64,7 +69,11 @@ function SelectUser(props) {
           {users.map((user, index) => {
             return (
               <Link to={{ pathname: `/home`, state: { user: user } }}>
-                <div key={index} className="user-grid-element">
+                <div
+                  key={index}
+                  className="user-grid-element"
+                  onClick={() => storeUser(user)}
+                >
                   <UserCard key={index} user={user} />
                 </div>
               </Link>

@@ -1,57 +1,88 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import MovieInfoCard from "../MovieInfoCard/MovieInfoCard";
 import "./MovieCard.css";
 
-function MovieCard(props) {
-  const { posterPath, title } = props.movie;
+function MovieCard({ movie }) {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const { posterPath, title } = movie;
   const [progress, setProgress] = useState(null);
+  const [isHovering, setIsHovering] = useState(false);
 
   const baseUrl = "https://image.tmdb.org/t/p/";
   const sizeUrl = "w500/";
 
   useEffect(() => {
     async function getMovieProgress(user) {
-      const progress = getMovieProgressHelper(user);
-      setProgress(progress);
+      const { timeElapsed } = await getMovieProgressHelper(user);
+      setProgress(timeElapsed ? timeElapsed : 0);
+      if (progress > 0)
+        console.log(
+          "Progress:",
+          `(${progress} / ${movie.runtime}) * 100 =`,
+          Math.round((progress / movie.runtime) * 100)
+        );
     }
-
-    //getMovieProgress(props.user);
+    getMovieProgress(user);
   }, []);
 
   const getMovieProgressHelper = async (user) => {
+    if (!user) return 0;
     const res = await fetch(
-      `http://10.0.0.158:5000/api/users/progress/${user._id}/${props.movie._id}`
+      `http://10.0.0.158:5000/api/users/progress/${user._id}/${movie._id}`
     );
     const progress = await res.json();
-    console.log(progress);
     return progress;
+  };
+
+  const handleMouseOver = () => {
+    setIsHovering(true);
+  };
+
+  const handleMouseOut = () => {
+    setIsHovering(false);
   };
 
   // Sizing of this component should be dynamic based on the size of the screen
   return (
     <div className="movie-card-wrapper">
-      <div className="movie-card">
-        <img
-          className="movie-card-back"
-          src={baseUrl + sizeUrl + posterPath}
-          alt={title}
-        />
-        <Link
-          to={{ pathname: `/movie/${props.movie._id}`, state: props.movie }}
+      {isHovering && <MovieInfoCard />}
+      <Link
+        to={{
+          pathname: `/movie/${movie._id}`,
+          state: { movie, user },
+        }}
+      >
+        <div
+          className="movie-card"
+          onMouseOver={handleMouseOver}
+          onMouseOut={handleMouseOut}
         >
-          <div className="card-info">
-            <h5 className="movie-card-title">{title}</h5>
-            <div className="play-button">
-              {props.children}
-              <FontAwesomeIcon icon="play" size="3x" color="white" />
-            </div>
+          <img
+            className="movie-card-back"
+            src={baseUrl + sizeUrl + posterPath}
+            alt={title}
+          />
+          <div
+            className="progress-bar-background"
+            style={{
+              display: `${progress != 0 ? "" : "none"}`,
+            }}
+          >
+            <span
+              className="progress-bar"
+              style={{
+                width: `${
+                  progress != 0
+                    ? Math.round((progress / movie.runtime) * 100)
+                    : 0
+                }%`,
+              }}
+            ></span>
           </div>
-        </Link>
-        <div hidden className="progress-bar-background">
-          <span className="progress-bar"></span>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }

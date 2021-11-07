@@ -52,12 +52,11 @@ a {
 }
 
 .stack .grid {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: block;
   padding: 0 60px;
-  overflow-x: hidden;
   width: 100%;
+  white-space: nowrap;
+  text-align: left;
 }
 
 .stack .grid::-webkit-scrollbar {

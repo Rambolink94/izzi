@@ -19,7 +19,9 @@ function Home(props) {
 
   const location = useLocation();
 
-  const { user } = location.state;
+  const { user } = location.state
+    ? location.state
+    : localStorage.getItem("user");
 
   const getMovieStacks = async () => {
     const stacks = [];

@@ -1,0 +1,11 @@
+.movie-info-card-wrapper {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  background-color: lightblue;
+  z-index: 200;
+}
+/*# sourceMappingURL=MovieInfoCard.css.map */

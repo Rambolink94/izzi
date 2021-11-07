@@ -24,16 +24,23 @@ const Movie = mongoose.model(
           "A Movie must have at least one genre. Otherwise it will not appear on izzi.",
       },
     },
+    collectionID: { type: Number },
     releaseDate: Date,
     runtime: { type: Number, required: true },
     connected: { type: Boolean, required: true },
   })
 );
 
+const Collection = mongoose.model(
+  "Collection",
+  new mongoose.Schema({
+    collectionID: { type: mongoose.Schema.Types.ObjectId, required: true },
+  })
+);
+
 // Get all movies
 router.get("/", async (req, res) => {
-  // Potentially sort by random for a different experience everytime
-  const movies = await Movie.find().sort("title");
+  // Potentially sort by random for a different experience everytimemovies = await Movie.find().sort({ collectionID: "asc", title: "asc" });
   res.send(movies);
 });
 
@@ -146,6 +153,7 @@ router.post("/", async (req, res) => {
     backdropPath: req.body.backdropPath,
     videoSrc: req.body.videoSrc,
     genres: req.body.genres,
+    collectionID: req.body.collectionID,
     releaseDate: req.body.releaseDate,
     runtime: req.body.runtime,
     connected: req.body.connected,
@@ -170,6 +178,7 @@ router.put("/:id", async (req, res) => {
       backdropPath: req.body.backdropPath,
       videoSrc: req.body.videoSrc,
       genres: req.body.genres,
+      collectionID: req.body.collectionID,
       releaseDate: req.body.releaseDate,
       runtime: req.body.runtime,
       connected: req.body.connected,
@@ -197,6 +206,27 @@ router.delete("/:id", async (req, res) => {
   res.send(movie);
 });
 
+// Collections
+router.post("/collections", async (req, res) => {
+  const { error } = validateCollection(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  Collection.findOneAndUpdate(
+    {
+      collectionID: req.body.collectionID,
+    },
+    {
+      collectionID: req.body.collectionID,
+    },
+    { upsert: true },
+    (error) => {
+      if (error) return res.send(500, { error: error });
+
+      return res.send(true);
+    }
+  );
+});
+
 // Initial input validation
 function validateMovie(movie) {
   const schema = Joi.object({
@@ -208,12 +238,21 @@ function validateMovie(movie) {
     backdropPath: Joi.string().required(),
     videoSrc: Joi.string().required(),
     genres: Joi.array().required(), // Should do more here, but this is good for now
+    collectionID: Joi.number().allow(null),
     releaseDate: Joi.date(),
     runtime: Joi.number().required(),
     connected: Joi.boolean().required(),
   });
 
   return schema.validate(movie);
+}
+
+function validateCollection(collection) {
+  const schema = Joi.object({
+    collectionID: Joi.number().required(),
+  });
+
+  return schema.validate(collection);
 }
 
 module.exports = router;

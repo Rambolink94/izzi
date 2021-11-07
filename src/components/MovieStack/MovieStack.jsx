@@ -10,6 +10,8 @@ function MovieStack(props) {
   const [isAtStart, setIsAtStart] = useState(true);
   const [isAtEnd, setIsAtEnd] = useState(false);
 
+  const [scrollX, setScrollX] = useState(0);
+
   useEffect(() => {
     window.addEventListener("resize", () => checkArrows());
     //This might be causing an error
@@ -29,6 +31,8 @@ function MovieStack(props) {
     else setIsAtStart(false);
 
     // Check if right should render
+    console.log(`${scrollX} + ${stackSize} >= ${stack.scrollWidth}`);
+    console.log(`${scrollX} + ${stackSize} >= ${scrollX}`);
     if (stack.scrollLeft + stackSize >= stack.scrollWidth) setIsAtEnd(true);
     else setIsAtEnd(false);
   };
@@ -38,27 +42,24 @@ function MovieStack(props) {
     const stackSize = stack.offsetWidth;
 
     console.log("Stack Size:", stackSize);
+    console.log("ScrollX: ", scrollX);
 
     // Set scroll position
     if (isLeft) {
-      console.log("Scroll: ", stack.scrollLeft - stackSize, " - ", 0);
-      stack.scrollBy({ top: 0, left: -stackSize, behavior: "smooth" });
-      if (stack.scrollLeft - stackSize <= 0) setIsAtStart(true);
+      console.log("Scroll: ", scrollX - stackSize, " - ", 0);
+      //stack.scrollBy({ top: 0, left: -stackSize, behavior: "smooth" });
+      setScrollX(scrollX - stackSize);
+      if (scrollX - stackSize <= 0) setIsAtStart(true);
       setIsAtEnd(false);
     } else {
-      console.log(
-        "Scroll: ",
-        stack.scrollLeft + stackSize,
-        " - ",
-        stack.scrollWidth
-      );
-      stack.scrollBy({ top: 0, left: stackSize, behavior: "smooth" });
-      if (stack.scrollWidth - (stack.scrollLeft + stackSize) < stackSize)
-        setIsAtEnd(true);
+      console.log("Scroll: ", scrollX + stackSize, " - ", stack.scrollWidth);
+      //stack.scrollBy({ top: 0, left: stackSize, behavior: "smooth" });
+      setScrollX(scrollX + stackSize);
+      if (scrollX - (scrollX + stackSize) < stackSize) setIsAtEnd(true);
       setIsAtStart(false);
     }
 
-    console.log(stack.scrollWidth - stack.scrollLeft, " < ", stackSize);
+    console.log(stack.scrollWidth - scrollX, " < ", stackSize);
   };
 
   return (
@@ -75,25 +76,11 @@ function MovieStack(props) {
         </Link>
       </div>
       <div className="stack">
-        <div className="grid" ref={stackRef}>
-          {props.movies.map((movie, index) => (
-            <MovieCard key={index} movie={movie} user={props.user} />
-          ))}
-        </div>
-        <div className="arrow-wrapper">
-          {/* Consider making arrows components. Refactor regardless. */}
-          <div
-            className="right-arrow"
-            style={!isAtEnd ? { display: "" } : { display: "none" }}
-            onClick={() => scrollStack(false)}
-          >
-            <FontAwesomeIcon
-              className="arrow"
-              icon="chevron-right"
-              size="4x"
-              inverse
-            />
-          </div>
+        <div
+          className="grid"
+          style={{ transform: [{ transformX: scrollX }] }}
+          ref={stackRef}
+        >
           <div
             className="left-arrow"
             style={!isAtStart ? { display: "" } : { display: "none" }}
@@ -102,6 +89,23 @@ function MovieStack(props) {
             <FontAwesomeIcon
               className="arrow"
               icon="chevron-left"
+              size="4x"
+              inverse
+            />
+          </div>
+
+          {props.movies.map((movie, index) => (
+            <MovieCard key={index} movie={movie} user={props.user} />
+          ))}
+
+          <div
+            className="right-arrow"
+            style={!isAtEnd ? { display: "" } : { display: "none" }}
+            onClick={() => scrollStack(false)}
+          >
+            <FontAwesomeIcon
+              className="arrow"
+              icon="chevron-right"
               size="4x"
               inverse
             />

@@ -8,7 +8,7 @@ router.get("/video/:path", (req, res) => {
     res.status(400).send("No range header found.");
   }
 
-  const basePath = "D:\\Knight's Movies/";
+  const basePath = "G:\\Knight's Movies/";
   const { path } = req.params;
   const fullPath = basePath + path;
 

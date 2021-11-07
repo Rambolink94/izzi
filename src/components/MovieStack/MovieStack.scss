@@ -46,10 +46,11 @@ a {
 .stack {
   position: relative;
   .grid {
-    display: flex;
+    display: block;
     padding: 0 $stack-side-width;
-    overflow-x: hidden;
     width: 100%;
+    white-space: nowrap;
+    text-align: left;
 
     &::-webkit-scrollbar {
       display: none;

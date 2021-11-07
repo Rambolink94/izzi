@@ -9,6 +9,7 @@ const genres = require("./routes/genres");
 const users = require("./routes/users");
 const tmdbPaths = require("./routes/tmdb-paths");
 const dotenv = require("dotenv");
+const movieSrcAnalyzer = require("../utility/movieSrcAnalyzer");
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ mongoose
   .connect("mongodb://localhost/izzi", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   })
   .then(() => console.log("Connected to MongoDB..."))
   .catch((err) => console.error("Could not connect to MongoDB...", err));
@@ -30,15 +32,10 @@ app.use("/api/genres/", genres);
 app.use("/api/users/", users);
 app.use("/api/tmdb/", tmdbPaths);
 
-const movieSrcAnalyzer = require("../izzi-server/movieSrcAnalyzer");
-const analyzer = new movieSrcAnalyzer();
-
 //These calls need to eventually be moved elsewhere, but for now this works
 async function beginAnalysis() {
-  const names = await analyzer.getMovieTitles();
-  const ids = await analyzer.getTMDBids(names, false);
-  await analyzer.createMovies(ids);
-  console.log("DONE!");
+  const analyzer = new movieSrcAnalyzer();
+  await analyzer.analyze();
 }
 
 //beginAnalysis();
