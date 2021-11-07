@@ -9,8 +9,9 @@ npm start
 
 # Start the backend
 ```sh
-cd tmdb_api
-node index.js
+nodemon tmdb_api
+// or
+node tmdb_api
 ```
 
 The backend currently initializes and updates the entire list of movies each time you start the server. This will definitely need to be changed. However, I may rewrite the server app in C# and .NET anyway.
