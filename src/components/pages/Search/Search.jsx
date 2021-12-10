@@ -15,7 +15,7 @@ function Search() {
     //setQueryValue(query);
     console.log(query);
     const res = await fetch(
-      `http://10.0.0.158:5000/api/movies/search/${query}`
+      `http://${process.env.REACT_APP_IP_ADDRESS}:${process.env.REACT_APP_PORT}/api/movies/search/${query}`
     );
     const movies = await res.json();
     setMovies(movies);

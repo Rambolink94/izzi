@@ -40,7 +40,8 @@ const Collection = mongoose.model(
 
 // Get all movies
 router.get("/", async (req, res) => {
-  // Potentially sort by random for a different experience everytimemovies = await Movie.find().sort({ collectionID: "asc", title: "asc" });
+  // Potentially sort by random for a different experience everytime
+  movies = await Movie.find().sort({ collectionID: "asc", title: "asc" });
   res.send(movies);
 });
 

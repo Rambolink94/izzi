@@ -5,6 +5,7 @@ import MovieInfoCard from "../MovieInfoCard/MovieInfoCard";
 import "./MovieCard.css";
 
 function MovieCard({ movie }) {
+  console.log("Movie", movie);
   const user = JSON.parse(localStorage.getItem("user"));
   const { posterPath, title } = movie;
   const [progress, setProgress] = useState(null);
@@ -28,12 +29,20 @@ function MovieCard({ movie }) {
   }, []);
 
   const getMovieProgressHelper = async (user) => {
-    if (!user) return 0;
+    if (!user) return { timeElapsed: 0 };
     const res = await fetch(
-      `http://10.0.0.158:5000/api/users/progress/${user._id}/${movie._id}`
-    );
-    const progress = await res.json();
-    return progress;
+      `http://${process.env.REACT_APP_IP_ADDRESS}:${process.env.REACT_APP_PORT}/api/users/progress/${user._id}/${movie._id}`
+    )
+      .then((res) => {
+        return res.json();
+      })
+      .catch((error) => {
+        console.error(
+          `Could not pull progress bar for movie with id ${movie.id} with user ${user.id}`
+        );
+      });
+    console.log(res);
+    return res;
   };
 
   const handleMouseOver = () => {

@@ -9,6 +9,7 @@ function Home(props) {
   const [stacks, setStacks] = useState([]);
 
   useEffect(() => {
+    console.log(location.state);
     async function setupStacks() {
       const stacks = await getMovieStacks();
       setStacks(stacks);
@@ -26,13 +27,15 @@ function Home(props) {
   const getMovieStacks = async () => {
     const stacks = [];
     // get genres
-    const res = await fetch("http://10.0.0.158:5000/api/genres");
+    const res = await fetch(
+      `http://${process.env.REACT_APP_IP_ADDRESS}:${process.env.REACT_APP_PORT}/api/genres`
+    );
     const genres = await res.json();
 
     await Promise.all(
       genres.map(async (genre) => {
         const res = await fetch(
-          `http://10.0.0.158:5000/api/movies/genre/${genre._id}`
+          `http://${process.env.REACT_APP_IP_ADDRESS}:${process.env.REACT_APP_PORT}/api/movies/genre/${genre._id}`
         );
         const movies = await res.json();
         stacks.push({ genre: genre, movies: movies });
@@ -44,20 +47,22 @@ function Home(props) {
   return (
     <div>
       <Header />
-      {stacks.map((stack, index) => {
-        if (stack.movies.length > 0) {
-          return (
-            <MovieStack
-              key={index}
-              genre={stack.genre}
-              movies={stack.movies}
-              user={user}
-            />
-          );
-        } else {
-          return null;
-        }
-      })}
+      <div className="stack-body">
+        {stacks.map((stack, index) => {
+          if (stack.movies.length > 0) {
+            return (
+              <MovieStack
+                key={index}
+                genre={stack.genre}
+                movies={stack.movies}
+                user={user}
+              />
+            );
+          } else {
+            return null;
+          }
+        })}
+      </div>
       <Footer />
     </div>
   );

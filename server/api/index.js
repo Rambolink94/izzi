@@ -10,8 +10,13 @@ const users = require("./routes/users");
 const tmdbPaths = require("./routes/tmdb-paths");
 const dotenv = require("dotenv");
 const movieSrcAnalyzer = require("../utility/movieSrcAnalyzer");
+const systemIpAddress = require("../utility/systemInformation");
+const { Client } = require("pg");
 
 dotenv.config();
+
+const client = new Client();
+client.connect();
 
 mongoose
   .connect("mongodb://localhost/izzi", {
@@ -41,5 +46,7 @@ async function beginAnalysis() {
 //beginAnalysis();
 
 // This will probably fail on some systems if something is already listening on this port
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Listening on port ${process.env.PORT}...`));
+const port = process.env.REACT_APP_PORT || 3000;
+app.listen(port, () =>
+  console.log(`Listening on port ${process.env.REACT_APP_PORT}...`)
+);

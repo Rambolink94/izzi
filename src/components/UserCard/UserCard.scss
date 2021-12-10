@@ -1,13 +1,34 @@
 .user-wrapper {
-  width: 100%;
-  height: 100%;
-  background-color: #3f51b5;
-  display: flex;
-  justify-content: center;
+  border: 3px solid transparent;
+  border-radius: 8px;
+
+  overflow: hidden;
   align-items: center;
+
+  &:hover {
+    border: 3px solid white;
+    cursor: pointer;
+  }
+}
+
+.user-image {
+  background-image: linear-gradient(
+    136deg,
+    rgb(53, 118, 221) 0%,
+    rgb(94, 53, 176) 50%,
+    rgb(138, 35, 135) 100%
+  );
+  width: 100%;
+  img {
+    max-height: 200px;
+    max-width: 200px;
+    min-height: 84px;
+    min-width: 84px;
+    background-size: cover;
+  }
 }
 
 .username {
-  color: white;
+  color: #5a5a5a;
   text-transform: uppercase;
 }

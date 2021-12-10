@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 mongoose
-  .connect("mongodb://10.0.0.158/izzi", {
+  .connect(`mongodb://${process.env.IP_ADDRESS}/izzi`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

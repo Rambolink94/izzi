@@ -24,21 +24,26 @@ function SelectUser() {
   }, []);
 
   const getUsersHelper = async () => {
-    const res = await fetch(`http://10.0.0.158:5000/api/users`);
+    const res = await fetch(
+      `http://${process.env.REACT_APP_IP_ADDRESS}:${process.env.REACT_APP_PORT}/api/users`
+    );
     const users = await res.json();
     return users;
   };
 
   const createNewUser = async (username, allowAdultContent) => {
     console.log(username + " | " + allowAdultContent);
-    const res = await fetch(`http://10.0.0.158:5000/api/users/`, {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username: username,
-        allowAdultContent: allowAdultContent,
-      }),
-    });
+    const res = await fetch(
+      `http://${process.env.REACT_APP_IP_ADDRESS}:${process.env.REACT_APP_PORT}/api/users/`,
+      {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: username,
+          allowAdultContent: allowAdultContent,
+        }),
+      }
+    );
     await res.json();
     const users = await getUsersHelper();
     showUserModal(false);
@@ -67,24 +72,15 @@ function SelectUser() {
         <h1 className="select-user">Select User</h1>
         <div className="user-grid">
           {users.map((user, index) => {
+            console.log(user);
             return (
-              <Link to={{ pathname: `/home`, state: { user: user } }}>
-                <div
-                  key={index}
-                  className="user-grid-element"
-                  onClick={() => storeUser(user)}
-                >
+              <div onClick={() => storeUser(user)}>
+                <Link to={{ pathname: "/home" }} state={{ user }}>
                   <UserCard key={index} user={user} />
-                </div>
-              </Link>
+                </Link>
+              </div>
             );
           })}
-          <div
-            className="user-grid-element add-user-button"
-            onClick={showUserModal}
-          >
-            <FontAwesomeIcon icon="plus" inverse className="element-icon" />
-          </div>
         </div>
       </div>
       {isModalActive ? (

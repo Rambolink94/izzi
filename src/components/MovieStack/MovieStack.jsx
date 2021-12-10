@@ -25,41 +25,41 @@ function MovieStack(props) {
   const checkArrows = () => {
     const stack = stackRef.current;
     if (!stack) return;
-    const stackSize = stack.offsetWidth;
+    const screenWidth = stack.offsetWidth;
 
-    if (stack.scrollLeft <= 0) setIsAtStart(true);
+    if (scrollX <= 0) setIsAtStart(true);
     else setIsAtStart(false);
 
     // Check if right should render
-    console.log(`${scrollX} + ${stackSize} >= ${stack.scrollWidth}`);
-    console.log(`${scrollX} + ${stackSize} >= ${scrollX}`);
-    if (stack.scrollLeft + stackSize >= stack.scrollWidth) setIsAtEnd(true);
+    // console.log(`${scrollX} + ${screenWidth} >= ${stack.scrollWidth}`);
+    // console.log(`${scrollX} + ${screenWidth} >= ${scrollX}`);
+    if (scrollX + screenWidth >= stack.scrollWidth) setIsAtEnd(true);
     else setIsAtEnd(false);
   };
 
   const scrollStack = (isLeft = true) => {
     const stack = stackRef.current;
-    const stackSize = stack.offsetWidth;
+    const screenWidth = stack.offsetWidth;
+    const scrollWidth = stack.scrollWidth - screenWidth;
 
-    console.log("Stack Size:", stackSize);
-    console.log("ScrollX: ", scrollX);
+    // console.log("Stack Size:", screenWidth);
+    // console.log("Scroll Width:", scrollWidth);
+    // console.log("ScrollX: ", scrollX);
 
     // Set scroll position
     if (isLeft) {
-      console.log("Scroll: ", scrollX - stackSize, " - ", 0);
+      // console.log("Scroll: ", scrollX - screenWidth, " - ", 0);
       //stack.scrollBy({ top: 0, left: -stackSize, behavior: "smooth" });
-      setScrollX(scrollX - stackSize);
-      if (scrollX - stackSize <= 0) setIsAtStart(true);
+      setScrollX(scrollX - screenWidth);
+      if (scrollX - screenWidth <= 0) setIsAtStart(true);
       setIsAtEnd(false);
     } else {
-      console.log("Scroll: ", scrollX + stackSize, " - ", stack.scrollWidth);
+      // console.log("Scroll: ", scrollX + screenWidth, " + ", scrollWidth);
       //stack.scrollBy({ top: 0, left: stackSize, behavior: "smooth" });
-      setScrollX(scrollX + stackSize);
-      if (scrollX - (scrollX + stackSize) < stackSize) setIsAtEnd(true);
+      setScrollX(scrollX + screenWidth);
+      if (scrollX + screenWidth >= scrollWidth) setIsAtEnd(true);
       setIsAtStart(false);
     }
-
-    console.log(stack.scrollWidth - scrollX, " < ", stackSize);
   };
 
   return (
@@ -77,39 +77,37 @@ function MovieStack(props) {
       </div>
       <div className="stack">
         <div
+          className="left-arrow"
+          style={!isAtStart ? { display: "" } : { display: "none" }}
+          onClick={() => scrollStack(true)}
+        >
+          <FontAwesomeIcon
+            className="arrow"
+            icon="chevron-left"
+            size="4x"
+            inverse
+          />
+        </div>
+        <div
           className="grid"
-          style={{ transform: [{ transformX: scrollX }] }}
+          style={{ transform: `translateX(-${scrollX}px)` }}
           ref={stackRef}
         >
-          <div
-            className="left-arrow"
-            style={!isAtStart ? { display: "" } : { display: "none" }}
-            onClick={() => scrollStack(true)}
-          >
-            <FontAwesomeIcon
-              className="arrow"
-              icon="chevron-left"
-              size="4x"
-              inverse
-            />
-          </div>
-
           {props.movies.map((movie, index) => (
             <MovieCard key={index} movie={movie} user={props.user} />
           ))}
-
-          <div
-            className="right-arrow"
-            style={!isAtEnd ? { display: "" } : { display: "none" }}
-            onClick={() => scrollStack(false)}
-          >
-            <FontAwesomeIcon
-              className="arrow"
-              icon="chevron-right"
-              size="4x"
-              inverse
-            />
-          </div>
+        </div>
+        <div
+          className="right-arrow"
+          style={!isAtEnd ? { display: "" } : { display: "none" }}
+          onClick={() => scrollStack(false)}
+        >
+          <FontAwesomeIcon
+            className="arrow"
+            icon="chevron-right"
+            size="4x"
+            inverse
+          />
         </div>
       </div>
     </div>

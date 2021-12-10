@@ -38,10 +38,11 @@
       border: 3px solid #3d3d3d;
       width: 100%;
       height: 100%;
-      transition: transform 0.2s;
+      transition: border 0.2s;
+      overflow: hidden;
 
       &:hover {
-        transform: scale(1.05);
+        border: 3px solid white;
         cursor: pointer;
       }
 

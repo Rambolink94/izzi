@@ -20,16 +20,19 @@ function Movie() {
   };
 
   const saveMovieProgress = async () => {
-    const res = await fetch(`http://10.0.0.158:5000/api/users/progress`, {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        userId: user._id,
-        movieId: movie._id,
-        timeElapsed: movieElement.current.currentTime / 60,
-        runtime: movie.runtime,
-      }),
-    });
+    const res = await fetch(
+      `http://${process.env.REACT_APP_IP_ADDRESS}:${process.env.REACT_APP_PORT}/api/users/progress`,
+      {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: user._id,
+          movieId: movie._id,
+          timeElapsed: movieElement.current.currentTime / 60,
+          runtime: movie.runtime,
+        }),
+      }
+    );
     const success = await res.json();
     console.log(success);
     console.log("Progress " + (success ? "Saved" : "Failed"));
@@ -50,7 +53,7 @@ function Movie() {
       >
         {console.log(`G:\\Knight's Movies\\${movie.videoSrc}`)}
         <source
-          src={`http://10.0.0.158:5000/api/streaming/video/${movie.videoSrc}`}
+          src={`http://${process.env.REACT_APP_IP_ADDRESS}:${process.env.REACT_APP_PORT}/api/streaming/video/${movie.videoSrc}`}
           type={`video/${extractExtension(movie.videoSrc)}`}
         />
         Browser doesn't support video

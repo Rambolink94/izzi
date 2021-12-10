@@ -41,7 +41,8 @@ router.get("/progress/:userId/:movieId", async (req, res) => {
     userId: req.params.userId,
     movieId: req.params.movieId,
   });
-  res.send(movieProgress ? movieProgress : "0");
+  console.log("HERE");
+  res.send(movieProgress ? movieProgress : { timeElapsed: 0 });
 });
 
 // Add new or update movie progress for user

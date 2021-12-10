@@ -24,7 +24,7 @@ function Category() {
 
   const getMoviesByGenre = async (genre) => {
     const res = await fetch(
-      `http://10.0.0.158:5000/api/movies/genre/${genre._id}`
+      `http://${process.env.REACT_APP_IP_ADDRESS}:${process.env.REACT_APP_PORT}/api/movies/genre/${genre._id}`
     );
     const movies = await res.json();
     return movies;

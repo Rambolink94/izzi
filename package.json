@@ -11,13 +11,16 @@
     "@testing-library/user-event": "^12.1.10",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
+    "env-cmd": "^10.1.0",
     "ffmpeg": "0.0.4",
     "get-video-duration": "^3.0.2",
     "joi": "^17.4.0",
     "joi-objectid": "^4.0.2",
+    "knex": "^0.95.14",
     "mongoose": "^5.12.13",
     "node-fetch": "^2.6.1",
     "node-ffprobe-installer": "^1.2.3",
+    "pg": "^8.7.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
@@ -25,7 +28,8 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start:frontend": "env-cmd -f .env react-scripts start",
+    "start:backend": "node server/api",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
