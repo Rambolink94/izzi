@@ -5,8 +5,8 @@ import "./MovieGrid.css";
 function MovieGrid(props) {
   return (
     <div className="grid-parent">
-      {props.movies.map((movie, index) => (
-        <MovieCard key={index} movie={movie} />
+      {props.movies.map((movieData, index) => (
+        <MovieCard key={index} movieData={movieData} />
       ))}
     </div>
   );

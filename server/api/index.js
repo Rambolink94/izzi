@@ -10,13 +10,8 @@ const users = require("./routes/users");
 const tmdbPaths = require("./routes/tmdb-paths");
 const dotenv = require("dotenv");
 const movieSrcAnalyzer = require("../utility/movieSrcAnalyzer");
-const systemIpAddress = require("../utility/systemInformation");
-const { Client } = require("pg");
 
 dotenv.config();
-
-const client = new Client();
-client.connect();
 
 mongoose
   .connect("mongodb://localhost/izzi", {

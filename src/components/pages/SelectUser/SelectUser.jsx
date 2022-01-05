@@ -5,6 +5,7 @@ import Header from "../../Header/Header";
 import UserCard from "../../UserCard/UserCard";
 import UserCreationModal from "../../UserCreationModal/UserCreationModal";
 import "./SelectUser.css";
+import axios from "axios";
 
 function SelectUser() {
   const [users, setUsers] = useState([]);
@@ -24,27 +25,23 @@ function SelectUser() {
   }, []);
 
   const getUsersHelper = async () => {
-    const res = await fetch(
-      `http://${process.env.REACT_APP_IP_ADDRESS}:${process.env.REACT_APP_PORT}/api/users`
-    );
-    const users = await res.json();
-    return users;
+    const response = await axios({
+      method: "get",
+      url: `http://${process.env.REACT_APP_IP_ADDRESS}:${process.env.REACT_APP_PORT}/api/users/all`,
+    });
+    return response.data;
   };
 
   const createNewUser = async (username, allowAdultContent) => {
     console.log(username + " | " + allowAdultContent);
-    const res = await fetch(
-      `http://${process.env.REACT_APP_IP_ADDRESS}:${process.env.REACT_APP_PORT}/api/users/`,
-      {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: username,
-          allowAdultContent: allowAdultContent,
-        }),
-      }
-    );
-    await res.json();
+    const data = await axios({
+      method: "post",
+      url: `http://${process.env.REACT_APP_IP_ADDRESS}:${process.env.REACT_APP_PORT}/api/users/create`,
+      data: JSON.stringify({
+        username: username,
+        allowAdultContent: allowAdultContent,
+      }),
+    });
     const users = await getUsersHelper();
     showUserModal(false);
     setUsers(users);
@@ -74,9 +71,9 @@ function SelectUser() {
           {users.map((user, index) => {
             console.log(user);
             return (
-              <div onClick={() => storeUser(user)}>
+              <div key={index} onClick={() => storeUser(user)}>
                 <Link to={{ pathname: "/home" }} state={{ user }}>
-                  <UserCard key={index} user={user} />
+                  <UserCard user={user} />
                 </Link>
               </div>
             );

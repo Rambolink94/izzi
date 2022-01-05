@@ -93,8 +93,8 @@ function MovieStack(props) {
           style={{ transform: `translateX(-${scrollX}px)` }}
           ref={stackRef}
         >
-          {props.movies.map((movie, index) => (
-            <MovieCard key={index} movie={movie} user={props.user} />
+          {props.movieData.map((movieData, index) => (
+            <MovieCard key={index} movieData={movieData} user={props.user} />
           ))}
         </div>
         <div

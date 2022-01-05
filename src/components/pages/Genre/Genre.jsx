@@ -5,11 +5,15 @@ import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Genre.css";
+import axios from "axios";
 
 function Category() {
   const location = useLocation();
 
   const { genre } = location.state;
+  const user = location.state.user
+    ? location.state.user
+    : JSON.parse(localStorage.getItem("user"));
 
   const [movies, setMovies] = useState([]);
 
@@ -23,10 +27,11 @@ function Category() {
   }, []);
 
   const getMoviesByGenre = async (genre) => {
-    const res = await fetch(
-      `http://${process.env.REACT_APP_IP_ADDRESS}:${process.env.REACT_APP_PORT}/api/movies/genre/${genre._id}`
-    );
-    const movies = await res.json();
+    const response = await axios({
+      method: "GET",
+      url: `http://${process.env.REACT_APP_IP_ADDRESS}:${process.env.REACT_APP_PORT}/api/movies/all/${genre.id}/${user.id}`,
+    });
+    const movies = response.data;
     return movies;
   };
 

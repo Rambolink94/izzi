@@ -4,46 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MovieInfoCard from "../MovieInfoCard/MovieInfoCard";
 import "./MovieCard.css";
 
-function MovieCard({ movie }) {
-  console.log("Movie", movie);
+function MovieCard({ movieData }) {
+  //console.log("Movie", movieData);
   const user = JSON.parse(localStorage.getItem("user"));
-  const { posterPath, title } = movie;
-  const [progress, setProgress] = useState(null);
+  const { poster_path: posterPath, title } = movieData;
   const [isHovering, setIsHovering] = useState(false);
 
   const baseUrl = "https://image.tmdb.org/t/p/";
   const sizeUrl = "w500/";
-
-  useEffect(() => {
-    async function getMovieProgress(user) {
-      const { timeElapsed } = await getMovieProgressHelper(user);
-      setProgress(timeElapsed ? timeElapsed : 0);
-      if (progress > 0)
-        console.log(
-          "Progress:",
-          `(${progress} / ${movie.runtime}) * 100 =`,
-          Math.round((progress / movie.runtime) * 100)
-        );
-    }
-    getMovieProgress(user);
-  }, []);
-
-  const getMovieProgressHelper = async (user) => {
-    if (!user) return { timeElapsed: 0 };
-    const res = await fetch(
-      `http://${process.env.REACT_APP_IP_ADDRESS}:${process.env.REACT_APP_PORT}/api/users/progress/${user._id}/${movie._id}`
-    )
-      .then((res) => {
-        return res.json();
-      })
-      .catch((error) => {
-        console.error(
-          `Could not pull progress bar for movie with id ${movie.id} with user ${user.id}`
-        );
-      });
-    console.log(res);
-    return res;
-  };
 
   const handleMouseOver = () => {
     setIsHovering(true);
@@ -59,8 +27,8 @@ function MovieCard({ movie }) {
       {isHovering && <MovieInfoCard />}
       <Link
         to={{
-          pathname: `/movie/${movie._id}`,
-          state: { movie, user },
+          pathname: `/movie/${encodeURI(movieData.title)}`,
+          state: { movieData, user },
         }}
       >
         <div
@@ -76,15 +44,21 @@ function MovieCard({ movie }) {
           <div
             className="progress-bar-background"
             style={{
-              display: `${progress != 0 ? "" : "none"}`,
+              display: `${
+                movieData.time_elapsed && movieData.time_elapsed != 0
+                  ? ""
+                  : "none"
+              }`,
             }}
           >
             <span
               className="progress-bar"
               style={{
                 width: `${
-                  progress != 0
-                    ? Math.round((progress / movie.runtime) * 100)
+                  movieData.time_elapsed != 0
+                    ? Math.round(
+                        (movieData.time_elapsed / movieData.runtime) * 100
+                      )
                     : 0
                 }%`,
               }}
