@@ -607,9 +607,11 @@ class movieSrcAnalyzer {
   }
 
   async createMovie(movie) {
-    if (movie.tmdbDetails == null)
+    if (movie.tmdbDetails == null) {
+      // Add manual details for movies that were not found.
       console.log(`Movie ${movie.cleanName} has no Details`);
-    if (movie.tmdbDetails == null) return;
+      return;
+    }
 
     // Handle Genres, Collections, and Movie Creation
     const genreIds = await genreService.handleGenres(movie.tmdbDetails.genres);

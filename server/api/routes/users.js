@@ -26,6 +26,7 @@ const UserProgressEntry = mongoose.model(
 // Get all users
 router.get("/", async (req, res) => {
   const users = await User.find().sort("username");
+  console.log("USERS");
   res.send(users);
 });
 

@@ -43,6 +43,16 @@ const getSingleMovie = async (req, res) => {
     );
 };
 
+const getMoviesByQuery = async (req, res) => {
+  knex("movies")
+    .select("*")
+    .where("title", "like", `%${req.params.query}%`)
+    .then((movies) => res.json(movies))
+    .catch((error) =>
+      res.json({ message: `There was an error retrieving movies: ${error}` })
+    );
+};
+
 // Create a movie
 const createMovie = async (req, res) => {
   knex("movies")
@@ -134,6 +144,7 @@ module.exports = {
   getAllMovies,
   getAll,
   getSingleMovie,
+  getMoviesByQuery,
   createMovie,
   updateMovie,
   streamMovie,
