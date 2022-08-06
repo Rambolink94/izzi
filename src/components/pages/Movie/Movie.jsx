@@ -52,7 +52,6 @@ function Movie() {
         poster={`${baseUrl}${sizeUrl}${movieData.backdrop_path}`}
         ref={movieElement}
       >
-        {console.log(`G:\\Knight's Movies\\${movieData.video_src}`)}
         <source
           src={`http://${process.env.REACT_APP_IP_ADDRESS}:${process.env.REACT_APP_PORT}/api/movies/stream/${movieData.video_src}`}
           type={`video/${extractExtension(movieData.video_src)}`}

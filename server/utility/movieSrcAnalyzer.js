@@ -8,7 +8,7 @@ dotenv.config();
 
 const baseDirectory = "G:\\Knight's Movies";
 const IP_ADDRESS = process.env.REACT_APP_IP_ADDRESS;
-const PORT = process.env.REACT_APP_PORT;
+const PORT = process.env.PORT;
 
 class movieSrcAnalyzer {
   async analyze() {

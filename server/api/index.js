@@ -41,7 +41,5 @@ async function beginAnalysis() {
 //beginAnalysis();
 
 // This will probably fail on some systems if something is already listening on this port
-const port = process.env.REACT_APP_PORT || 3000;
-app.listen(port, () =>
-  console.log(`Listening on port ${process.env.REACT_APP_PORT}...`)
-);
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Listening on port ${process.env.PORT}...`));

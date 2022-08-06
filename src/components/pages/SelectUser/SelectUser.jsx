@@ -23,7 +23,6 @@ function SelectUser() {
 
     setIsModalActive(false);
   }, []);
-
   const getUsersHelper = async () => {
     const response = await axios({
       method: "get",
