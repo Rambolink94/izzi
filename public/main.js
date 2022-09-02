@@ -7,7 +7,8 @@ const createMainWindow = () => {
     show: false,
     backgroundColor: "white",
     webPreferences: {
-      nodeIntegration: false,
+      nodeIntegration: true,
+      contextIsolation: false,
     },
   });
   const startUrl = "http://localhost:3000";

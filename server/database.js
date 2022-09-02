@@ -53,9 +53,6 @@ knex.schema
         });
     }
   })
-  .then(() => {
-    console.log("Database initialized.");
-  })
   .catch((error) => {
     console.error(`There was an error initializing the database: ${error}`);
   });
@@ -79,9 +76,6 @@ knex.schema
           console.error(`There was an error creating table: ${error}`);
         });
     }
-  })
-  .then(() => {
-    console.log("Database initialized.");
   })
   .catch((error) => {
     console.error(`There was an error initializing the database: ${error}`);
@@ -108,9 +102,6 @@ knex.schema
         });
     }
   })
-  .then(() => {
-    console.log("Database initialized.");
-  })
   .catch((error) => {
     console.error(`There was an error initializing the database: ${error}`);
   });
@@ -134,9 +125,6 @@ knex.schema
           console.error(`There was an error creating table: ${error}`);
         });
     }
-  })
-  .then(() => {
-    console.log("Database initialized.");
   })
   .catch((error) => {
     console.error(`There was an error initializing the database: ${error}`);
@@ -162,9 +150,6 @@ knex.schema
         });
     }
   })
-  .then(() => {
-    console.log("Database initialized.");
-  })
   .catch((error) => {
     console.error(`There was an error initializing the database: ${error}`);
   });
@@ -188,9 +173,6 @@ knex.schema
           console.error(`There was an error creating table: ${error}`);
         });
     }
-  })
-  .then(() => {
-    console.log("Database initialized.");
   })
   .catch((error) => {
     console.error(`There was an error initializing the database: ${error}`);
@@ -245,9 +227,6 @@ knex.schema
         });
     }
   })
-  .then(() => {
-    console.log("Database initialized.");
-  })
   .catch((error) => {
     console.error(`There was an error initializing the database: ${error}`);
   });
@@ -272,9 +251,6 @@ knex.schema
           console.error(`There was an error creating table: ${error}`);
         });
     }
-  })
-  .then(() => {
-    console.log("Database initialized.");
   })
   .catch((error) => {
     console.error(`There was an error initializing the database: ${error}`);

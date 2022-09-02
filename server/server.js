@@ -1,12 +1,12 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const collections = require("./server/api-v2/routes/collection.route");
-const genres = require("./server/api-v2/routes/genre.route");
-const movies = require("./server/api-v2/routes/movie.route");
-const users = require("./server/api-v2/routes/user.route");
-const tmdb = require("./server/api-v2/routes/tmdb.route");
-const movieSrcAnalyzer = require("./server/utility/movieSrcAnalyzer_v2");
+const collections = require("./api-v2/routes/collection.route");
+const genres = require("./api-v2/routes/genre.route");
+const movies = require("./api-v2/routes/movie.route");
+const users = require("./api-v2/routes/user.route");
+const tmdb = require("./api-v2/routes/tmdb.route");
+const movieSrcAnalyzer = require("./utility/movieSrcAnalyzer_v2");
 
 require("dotenv").config();
 

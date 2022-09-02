@@ -2,7 +2,7 @@ const express = require("express");
 const controller = require("../controllers/movie.controller.js");
 const router = express.Router();
 
-router.get("/all/:genreId/:userId", controller.getAll);
+router.get("/all/:genreId/:userId/:limit?", controller.getAll);
 router.get("/all/:userId", controller.getAllMovies);
 router.get("/search/:query", controller.getMoviesByQuery);
 router.get("/single/:tmdbId", controller.getSingleMovie);

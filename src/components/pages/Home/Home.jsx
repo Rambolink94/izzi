@@ -3,7 +3,8 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
-import MovieStack from "../../MovieStack/MovieStack";
+//import MovieStack from "../../MovieStack/MovieStack";
+import MovieStack from "../../../componentsV2/MovieStack";
 import "./Home.css";
 
 function Home(props) {
@@ -25,6 +26,7 @@ function Home(props) {
     : JSON.parse(localStorage.getItem("user"));
 
   const getMovieStacks = async () => {
+    const limit = 30;
     const stacks = [];
     // get genres
     const response = await axios({
@@ -37,7 +39,7 @@ function Home(props) {
       genres.map(async (genre) => {
         const response = await axios({
           method: "get",
-          url: `http://${process.env.REACT_APP_IP_ADDRESS}:${process.env.REACT_APP_PORT}/api/movies/all/${genre.id}/${user.id}`,
+          url: `http://${process.env.REACT_APP_IP_ADDRESS}:${process.env.REACT_APP_PORT}/api/movies/all/${genre.id}/${user.id}/${limit}`,
         });
         const movieData = response.data;
         stacks.push({ genre: genre, movieData: movieData });

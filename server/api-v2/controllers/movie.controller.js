@@ -25,9 +25,11 @@ const getAllMovies = async (req, res) => {
 };
 
 const getAll = async (req, res) => {
+  const limit = req.params.limit;
   const result = await movieService.getAllMoviesByGenreId(
     req.params.genreId,
-    req.params.userId
+    req.params.userId,
+    limit
   );
   console.log(result);
   res.send(result);

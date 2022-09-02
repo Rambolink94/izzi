@@ -35,7 +35,7 @@ const getMovieByTmdbId = async (tmdbId) => {
   return results[0]?.id;
 };
 
-const getAllMoviesByGenreId = async (genreId, userId) => {
+const getAllMoviesByGenreId = async (genreId, userId, limit = -1) => {
   const query = knex
     .select(
       "movies.id",
@@ -56,6 +56,11 @@ const getAllMoviesByGenreId = async (genreId, userId) => {
     })
     .where("movie_genres.genre_id", genreId)
     .orderByRaw("RANDOM()");
+
+  if (limit > 0) {
+    query.limit(limit);
+  }
+
   const results = await query;
 
   return results;

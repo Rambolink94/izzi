@@ -10,6 +10,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.15",
+    "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.3",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -39,7 +40,7 @@
   },
   "scripts": {
     "start:frontend": "env-cmd -f src/.env react-scripts start",
-    "start:backend": "nodemon ANALYSIS=$npm_config_analysis server.js",
+    "start:backend": "nodemon ANALYSIS=$npm_config_analysis server/server.js",
     "start:all": "concurrently \"yarn start:backend\" \"yarn start:frontend",
     "start:all-prod": "concurrently \"serve -s build\" \"yarn start:backend",
     "electron:serve": "concurrently -k \"cross-env BROWSER=none yarn start:frontend\" \"yarn electron:start\"",

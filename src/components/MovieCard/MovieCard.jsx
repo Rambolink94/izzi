@@ -41,29 +41,31 @@ function MovieCard({ movieData }) {
             src={baseUrl + sizeUrl + posterPath}
             alt={title}
           />
-          <div
-            className="progress-bar-background"
-            style={{
-              display: `${
-                movieData.time_elapsed && movieData.time_elapsed != 0
-                  ? ""
-                  : "none"
-              }`,
-            }}
-          >
-            <span
-              className="progress-bar"
+          {
+            <div
+              className="progress-bar-background"
               style={{
-                width: `${
-                  movieData.time_elapsed != 0
-                    ? Math.round(
-                        (movieData.time_elapsed / movieData.runtime) * 100
-                      )
-                    : 0
-                }%`,
+                display: `${
+                  movieData.time_elapsed && movieData.time_elapsed != 0
+                    ? ""
+                    : "none"
+                }`,
               }}
-            ></span>
-          </div>
+            >
+              <span
+                className="progress-bar"
+                style={{
+                  width: `${
+                    movieData.time_elapsed != 0
+                      ? Math.round(
+                          (movieData.time_elapsed / movieData.runtime) * 100
+                        )
+                      : 0
+                  }%`,
+                }}
+              ></span>
+            </div>
+          }
         </div>
       </Link>
     </div>

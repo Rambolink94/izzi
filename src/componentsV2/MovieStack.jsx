@@ -1,11 +1,11 @@
 //import MovieCard from "../MovieCard/MovieCard";
-import MovieCard from "../../componentsV2/MovieCard";
+import MovieCard from "./MovieCard";
+import ArrowButton from "./ArrowButton";
 import React, { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./MovieStack.css";
+import { Stack, Box } from "@mui/system";
+import { Typography } from "@mui/material";
 
-function MovieStack(props) {
+function MovieStack({ movieData, genre }) {
   const stackRef = useRef(null);
 
   const [isAtStart, setIsAtStart] = useState(true);
@@ -22,6 +22,11 @@ function MovieStack(props) {
       window.removeEventListener("resize", () => checkArrows());
     };
   }, []);
+
+  const stackStyle = {
+    position: "relative",
+    margin: "50px 80px",
+  };
 
   const checkArrows = () => {
     const stack = stackRef.current;
@@ -56,7 +61,6 @@ function MovieStack(props) {
       setIsAtEnd(false);
     } else {
       // console.log("Scroll: ", scrollX + screenWidth, " + ", scrollWidth);
-      //stack.scrollBy({ top: 0, left: stackSize, behavior: "smooth" });
       setScrollX(scrollX + screenWidth);
       if (scrollX + screenWidth >= scrollWidth) setIsAtEnd(true);
       setIsAtStart(false);
@@ -64,60 +68,45 @@ function MovieStack(props) {
   };
 
   return (
-    <div className="stack-wrapper">
-      <div className="stack-title">
-        <h4 className="genre-name">{props.genre.name}</h4>
-        <Link
-          to={{
-            pathname: `genre/${props.genre.name}`,
-            state: { genre: props.genre },
+    <Box style={{ position: "relative" }}>
+      <ArrowButton
+        active={!isAtStart}
+        isLeft={true}
+        onClick={() => scrollStack(true)}
+      />
+      <Box style={stackStyle}>
+        {/* Add a stack header */}
+        <Typography
+          varient="h3"
+          gutterBottom={true}
+          alight="left"
+          sx={{ color: "white", fontWeight: "bold" }}
+        >
+          {genre.name}
+        </Typography>
+        <Stack
+          sx={{
+            position: "relative",
+            top: 0,
+            left: 0,
+            transform: `translateX(-${scrollX}px)`,
           }}
-        >
-          <p className="view-all-text">View All</p>
-        </Link>
-      </div>
-      <div className="stack">
-        <div
-          className="left-arrow"
-          style={!isAtStart ? { display: "" } : { display: "none" }}
-          onClick={() => scrollStack(true)}
-        >
-          <FontAwesomeIcon
-            className="arrow"
-            icon="chevron-left"
-            size="4x"
-            inverse
-          />
-        </div>
-        <div
-          className="grid"
-          style={{ transform: `translateX(-${scrollX}px)` }}
+          direction="row"
+          spacing={2}
           ref={stackRef}
         >
-          {props.movieData.map((movieData, index) => (
-            // <MovieCard
-            //   key={index}
-            //   isEndCard={index === props.movieData.length}
-            //   movieData={movieData}
-            //   user={props.user}
-            // />
+          {movieData.map((movieData, index) => (
             <MovieCard key={index} movieData={movieData} />
           ))}
-        </div>
-        <div
-          className="right-arrow"
-          style={!isAtEnd ? { display: "" } : { display: "none" }}
-          onClick={() => scrollStack(false)}
-        >
-          <FontAwesomeIcon
-            className="arrow"
-            icon="chevron-right"
-            size="4x"
-            inverse
-          />
-        </div>
-      </div>
-    </div>
+          <MovieCard endCard={true} genre={genre} />
+        </Stack>
+      </Box>
+      <ArrowButton
+        active={!isAtEnd}
+        isLeft={false}
+        onClick={() => scrollStack(false)}
+      />
+    </Box>
   );
 }
 
