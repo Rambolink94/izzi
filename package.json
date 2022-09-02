@@ -2,9 +2,11 @@
   "name": "izzi",
   "version": "0.1.0",
   "private": true,
+  "main": "public/main.js",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@ffprobe-installer/ffprobe": "^1.4.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.15",
@@ -16,9 +18,10 @@
     "axios-retry": "^3.2.4",
     "concurrently": "^7.3.0",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^10.0.0",
     "env-cmd": "^10.1.0",
-    "ffmpeg": "0.0.4",
+    "ffmpeg": "^0.0.4",
     "get-video-duration": "^3.0.2",
     "joi": "^17.4.0",
     "joi-objectid": "^4.0.2",
@@ -36,9 +39,11 @@
   },
   "scripts": {
     "start:frontend": "env-cmd -f src/.env react-scripts start",
-    "start:backend": "nodemon ANALYSIS=$npm_config_analysis server/api-v2/server.js",
-    "start:all": "concurrently \"npm run start:backend\" \"npm run start:frontend",
-    "start:all-prod": "concurrently \"serve -s build\" \"npm run start:backend",
+    "start:backend": "nodemon ANALYSIS=$npm_config_analysis server.js",
+    "start:all": "concurrently \"yarn start:backend\" \"yarn start:frontend",
+    "start:all-prod": "concurrently \"serve -s build\" \"yarn start:backend",
+    "electron:serve": "concurrently -k \"cross-env BROWSER=none yarn start:frontend\" \"yarn electron:start\"",
+    "electron:start": "wait-on tcp:3000 && electron .",
     "build": "env-cmd -f src/.env react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -62,6 +67,8 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^7.28.0"
+    "electron": "^20.1.1",
+    "eslint": "^7.28.0",
+    "wait-on": "^6.0.1"
   }
 }
