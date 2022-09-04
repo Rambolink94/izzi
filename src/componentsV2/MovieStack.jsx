@@ -4,8 +4,10 @@ import ArrowButton from "./ArrowButton";
 import React, { useEffect, useState, useRef } from "react";
 import { Stack, Box } from "@mui/system";
 import { Typography } from "@mui/material";
+import useMovieSearch from "../hooks/useMovieSearch";
+import SkeletonCard from "./SkeletonCard";
 
-function MovieStack({ movieData, genre }) {
+function MovieStack({ genre, user, innerRef }) {
   const stackRef = useRef(null);
 
   const [isAtStart, setIsAtStart] = useState(true);
@@ -21,11 +23,16 @@ function MovieStack({ movieData, genre }) {
     return () => {
       window.removeEventListener("resize", () => checkArrows());
     };
-  }, []);
+  });
+
+  const { loading, movies } = useMovieSearch(genre, user, 30);
 
   const stackStyle = {
     position: "relative",
     margin: "50px 80px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "baseline",
   };
 
   const checkArrows = () => {
@@ -33,14 +40,30 @@ function MovieStack({ movieData, genre }) {
     if (!stack) return;
     const screenWidth = stack.offsetWidth;
 
+    console.log(
+      "Scroll X:" +
+        scrollX +
+        " Screen W: " +
+        screenWidth +
+        " Scroll W: " +
+        stack.scrollWidth
+    );
     if (scrollX <= 0) setIsAtStart(true);
     else setIsAtStart(false);
 
     // Check if right should render
-    // console.log(`${scrollX} + ${screenWidth} >= ${stack.scrollWidth}`);
-    // console.log(`${scrollX} + ${screenWidth} >= ${scrollX}`);
     if (scrollX + screenWidth >= stack.scrollWidth) setIsAtEnd(true);
     else setIsAtEnd(false);
+  };
+
+  const createSkeletons = () => {
+    let skeletons = [];
+    const size = 10;
+    for (let i = 0; i < size; i++) {
+      skeletons.push(<SkeletonCard key={i} />);
+    }
+
+    return skeletons;
   };
 
   const scrollStack = (isLeft = true) => {
@@ -48,27 +71,24 @@ function MovieStack({ movieData, genre }) {
     const screenWidth = stack.offsetWidth;
     const scrollWidth = stack.scrollWidth - screenWidth;
 
-    // console.log("Stack Size:", screenWidth);
-    // console.log("Scroll Width:", scrollWidth);
-    // console.log("ScrollX: ", scrollX);
-
     // Set scroll position
     if (isLeft) {
-      // console.log("Scroll: ", scrollX - screenWidth, " - ", 0);
-      //stack.scrollBy({ top: 0, left: -stackSize, behavior: "smooth" });
       setScrollX(scrollX - screenWidth);
+
+      // Is at far left
       if (scrollX - screenWidth <= 0) setIsAtStart(true);
       setIsAtEnd(false);
     } else {
-      // console.log("Scroll: ", scrollX + screenWidth, " + ", scrollWidth);
       setScrollX(scrollX + screenWidth);
+
+      // Is at far right
       if (scrollX + screenWidth >= scrollWidth) setIsAtEnd(true);
       setIsAtStart(false);
     }
   };
 
   return (
-    <Box style={{ position: "relative" }}>
+    <Box ref={innerRef} style={{ position: "relative", minHeight: 150 }}>
       <ArrowButton
         active={!isAtStart}
         isLeft={true}
@@ -90,15 +110,18 @@ function MovieStack({ movieData, genre }) {
             top: 0,
             left: 0,
             transform: `translateX(-${scrollX}px)`,
+            minHeight: 200,
           }}
           direction="row"
           spacing={2}
           ref={stackRef}
         >
-          {movieData.map((movieData, index) => (
-            <MovieCard key={index} movieData={movieData} />
-          ))}
-          <MovieCard endCard={true} genre={genre} />
+          {movies?.length
+            ? movies.map((movieData, index) => (
+                <MovieCard key={index} movieData={movieData} />
+              ))
+            : createSkeletons()}
+          {!loading && <MovieCard endCard={true} />}
         </Stack>
       </Box>
       <ArrowButton

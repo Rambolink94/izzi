@@ -3,10 +3,23 @@ const { genreService } = require("../services");
 
 // Get all genres
 exports.getAllGenres = async (req, res) => {
+  const { pageNumber } = req.params;
+  const limit = 5;
+
   knex
     .select("*")
     .from("genres")
-    .then((genres) => res.json(genres))
+    .then((genres) => {
+      const slicedGenres = genres.slice(
+        (pageNumber - 1) * limit,
+        Math.min(pageNumber * limit, genres.length + 1)
+      );
+      res.json({
+        genres,
+        slicedGenres,
+        hasMore: pageNumber * limit < genres.length + 1,
+      });
+    })
     .catch((error) =>
       res.json({ message: `There was an error retrieving genres: ${error}` })
     );

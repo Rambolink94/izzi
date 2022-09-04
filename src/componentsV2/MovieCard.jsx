@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card, CardContent, CardMedia, LinearProgress } from "@mui/material";
+import { Card, CardContent, CardMedia } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ProgressBar from "./ProgressBar";
 

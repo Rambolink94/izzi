@@ -4,6 +4,7 @@ const createMainWindow = () => {
   let mainWindow = new BrowserWindow({
     width: electronScreen.getPrimaryDisplay().workArea.width,
     height: electronScreen.getPrimaryDisplay().workArea.height,
+    autoHideMenuBar: true,
     show: false,
     backgroundColor: "white",
     webPreferences: {

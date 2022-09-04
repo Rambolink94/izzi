@@ -8,6 +8,7 @@ function ArrowButton({ active, isLeft, onClick }) {
     display: active ? "" : "none",
     position: "absolute",
     color: "white",
+    backgroundColor: "#00000033",
     top: 0,
     left: isLeft ? 0 : "",
     right: !isLeft ? 0 : "",

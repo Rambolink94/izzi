@@ -26,7 +26,7 @@ import SelectUser from "./components/pages/SelectUser/SelectUser";
 import Movie from "./components/pages/Movie/Movie";
 import Genre from "./components/pages/Genre/Genre";
 import Search from "./components/pages/Search/Search";
-import Home from "./components/pages/Home/Home";
+import Home from "./pages/Home";
 
 library.add(
   faArrowAltCircleLeft,
@@ -58,7 +58,7 @@ function App() {
           <Route exact path="/">
             <SelectUser />
           </Route>
-          <Route path="/Home">
+          <Route path="/home">
             <Home />
           </Route>
           <Route path="/movie">
